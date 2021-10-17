@@ -38,7 +38,11 @@ We are planning on using junit for testing.
 # Authors
 
 Tyson Medlin        -   tjmedlin@email.sc.edu
+
 Luis Canales        -   lcanales@email.sc.edu
+
 Rachel Jessee       -   rljessee@email.sc.edu
+
 George Pegues       -   gpegues@email.sc.edu
+
 Prathamjeet Singh   -   psingh@email.sc.edu
