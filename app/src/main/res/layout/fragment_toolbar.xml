@@ -13,6 +13,7 @@
     <TextView
         android:layout_width="100dp"
         android:layout_height="25dp"
+        android:paddingTop="5dp"
         android:text="Dolphin Art"
         android:layout_marginLeft="45dp"
         android:textStyle="bold"

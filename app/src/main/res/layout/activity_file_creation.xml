@@ -13,8 +13,11 @@
         android:id="@+id/appbar_container"
         android:layout_width="match_parent"
         android:layout_height="25dp"
+        android:background="@color/color_secondaryLight"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:name="com.example.teamdolphin.ToolbarFragment"
+        tools:layout="@layout/fragment_toolbar" />
 
     <TextView
         android:id="@+id/textView"
@@ -33,9 +36,32 @@
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:src="@drawable/cancel_icon"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/image_preview_container"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/color_secondaryLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="-8dp"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/import_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/image_preview_container"
+        app:layout_constraintStart_toEndOf="@+id/image_preview_container" />
+
 
     <Button
         android:id="@+id/create_button"
