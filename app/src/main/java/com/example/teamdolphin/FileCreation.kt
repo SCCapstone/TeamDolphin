@@ -1,7 +1,11 @@
 package com.example.teamdolphin
 
+import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 
 class FileCreation : AppCompatActivity() {
@@ -9,6 +13,12 @@ class FileCreation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_creation)
         addFragment(ToolbarFragment())
+
+        //This is a click listener for cancel button to navigate back to the homepage
+        val imageButton = findViewById<ImageButton>(R.id.cancel_button)
+        imageButton.setOnClickListener {
+            super.onBackPressed()
+        }
     }
 
     /*
