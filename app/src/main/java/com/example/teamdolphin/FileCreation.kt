@@ -12,7 +12,6 @@ class FileCreation : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_creation)
-        addFragment(ToolbarFragment())
 
         //This is a click listener for cancel button to navigate back to the homepage
         val imageButton = findViewById<ImageButton>(R.id.cancel_button)
