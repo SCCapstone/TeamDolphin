@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ToolbarFragment">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/dolphin"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:text="TeamDolphin"
+        android:layout_marginLeft="45dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+</FrameLayout>
