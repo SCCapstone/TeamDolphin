@@ -10,6 +10,8 @@
 
     <!-- Our Primary colors mentioned in out wiki -> Design -->
     <color name="color_green">#4caf50</color>
-    <color name="color_light">#E0E0E0</color>
-    <color name="color_dark">#BDBDBD</color>
+    <color name="color_primaryLight">#E0E0E0</color>
+    <color name="color_secondaryLight">#BDBDBD</color>
+    <color name="color_primaryDark">#424242</color>
+    <color name="color_secondaryDark">#212121</color>
 </resources>
