@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //This is a button click listener to the button to go to the file creation activity
+        //This is a click listener for the button to navigate to FileCreation Page
         val button = findViewById<Button>(R.id.button)
         button.setOnClickListener {
             val intent = Intent(this, FileCreation::class.java)
