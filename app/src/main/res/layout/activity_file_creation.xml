@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,7 +21,7 @@
         tools:layout="@layout/fragment_toolbar" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_createProject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Project"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:src="@drawable/cancel_icon"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/text_createProject"
         app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
 
     <androidx.fragment.app.FragmentContainerView
@@ -52,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/button_import"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="-8dp"
@@ -62,18 +63,94 @@
         app:layout_constraintBottom_toBottomOf="@+id/image_preview_container"
         app:layout_constraintStart_toEndOf="@+id/image_preview_container" />
 
+    <EditText
+        android:id="@+id/field_width"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Width"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_preview_container" />
+
+    <EditText
+        android:id="@+id/field_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Height"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/field_width" />
+
+    <EditText
+        android:id="@+id/field_projectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Project Name"
+        android:clickable="false"
+        android:inputType="textPersonName"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/field_height" />
 
     <Button
-        android:id="@+id/create_button"
+        android:id="@+id/button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="@color/color_green"
         android:text="Create"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_backgroundColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Background Color"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/field_projectName" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/button_create"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Dark"
+            tools:layout_editor_absoluteX="206dp"
+            tools:layout_editor_absoluteY="454dp" />
+
+        <RadioButton
+            android:id="@+id/radio_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light"
+            tools:layout_editor_absoluteX="156dp"
+            tools:layout_editor_absoluteY="454dp" />
+    </RadioGroup>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
