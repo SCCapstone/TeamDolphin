@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamDolphin">
         <activity
+            android:name=".Canvas"
+            android:exported="true" />
+        <activity
             android:name=".FileCreation"
             android:exported="false" />
         <activity
