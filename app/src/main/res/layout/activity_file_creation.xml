@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FileCreation"
-    android:background="@color/color_primaryLight">
+    tools:context=".FileCreation">
 
     <!-- Fragment Container that will store toolbar of the app -->
 
@@ -14,7 +13,6 @@
         android:id="@+id/appbar_container"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:background="@color/color_secondaryLight"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp"
         android:name="com.example.teamdolphin.ToolbarFragment"
@@ -25,8 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Project"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:paddingTop="10dp"
         android:paddingLeft="10dp"
         android:textSize="16dp"
@@ -55,7 +51,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
-        android:background="@color/color_secondaryLight"
+        android:background="@color/color_primaryLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
@@ -114,10 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
-        android:backgroundTint="@color/color_green"
         android:text="Create"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -126,8 +119,6 @@
         android:id="@+id/text_backgroundColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Background Color"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
