@@ -3,12 +3,12 @@
     <style name="Theme.TeamDolphin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primaryLight</item>
-        <item name="colorPrimaryVariant">#E4D0D0</item>
-        <item name="colorOnPrimary">#DDB6B6</item>
+        <item name="colorPrimaryVariant">@color/color_green</item>
+        <item name="colorOnPrimary">@color/color_green</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/color_secondaryLight</item>
-        <item name="colorSecondaryVariant">#BFAAAA</item>
-        <item name="colorOnSecondary">#BC9696</item>
+        <item name="colorSecondaryVariant">@color/color_green</item>
+        <item name="colorOnSecondary">@color/color_green</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
