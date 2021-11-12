@@ -4,26 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbarSize="20dp"
+    android:scrollbarStyle="insideInset"
     tools:context=".MainActivity">
 
 
     <View
         android:id="@+id/colored_bar7"
         android:layout_width="420dp"
-        android:layout_height="match_parent"
+        android:layout_height="560dp"
+        android:alpha="0.5"
         android:background="#C8C8C8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/colored_bar"
-        app:layout_constraintVertical_bias="0.421" />
+        app:layout_constraintTop_toTopOf="@+id/colored_bar5" />
 
 
     <View
         android:id="@+id/colored_bar"
         android:layout_width="420dp"
         android:layout_height="28dp"
+        android:alpha="0.0"
         android:background="@color/color_primaryLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,23 +35,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <View
         android:id="@+id/colored_bar2"
         android:layout_width="420dp"
-        android:layout_height="100dp"
+        android:layout_height="90dp"
+        android:alpha="0.7"
         android:background="#C8C8C8"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/colored_bar3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/colored_bar"
-        app:layout_constraintVertical_bias="0.036" />
-
+        app:layout_constraintTop_toBottomOf="@+id/appbar_container2" />
 
     <View
         android:id="@+id/colored_bar3"
         android:layout_width="420dp"
         android:layout_height="40dp"
+        android:alpha="1"
         android:background="#AAAAAA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,19 +104,16 @@
         android:layout_width="420dp"
         android:layout_height="3dp"
         android:background="#838383"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/colored_bar"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintTop_toBottomOf="@+id/appbar_container2" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/appbar_container2"
         android:name="com.example.teamdolphin.ToolbarFragment"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:background="@color/color_primaryLight"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_toolbar"
         tools:layout_editor_absoluteX="-4dp" />
@@ -189,5 +190,11 @@
         </ScrollView>
     </LinearLayout>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container_toggleThemeButton"
+        android:name="com.example.teamdolphin.ToggleTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_toggle_theme" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

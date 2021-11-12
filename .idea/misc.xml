@@ -3,14 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_file_creation.xml" value="0.536" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_main.xml" value="0.4" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toolbar.xml" value="0.4" />
-        <entry key="app/src/main/res/layout/activity_canvas.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_file_creation.xml" value="0.182518115942029" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_toggle_theme.xml" value="0.2817028985507246" />
-        <entry key="app/src/main/res/layout/fragment_toolbar.xml" value="0.3338541666666667" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_canvas.xml" value="0.176" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_file_creation.xml" value="0.24975704567541301" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_main.xml" value="0.32614213197969544" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toggle_theme.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toolbar.xml" value="0.264" />
       </map>
     </option>
   </component>
