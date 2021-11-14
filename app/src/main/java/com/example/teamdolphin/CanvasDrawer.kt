@@ -54,7 +54,7 @@ class CanvasDrawer : AppCompatActivity() {
         //This needs to be fixed, it makes a new instance of home page, not return
         val button = findViewById<Button>(R.id.save_and_exit_button)
         button.setOnClickListener {
-            val intent = Intent(this, CanvasDrawer::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
