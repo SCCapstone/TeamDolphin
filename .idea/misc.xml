@@ -4,24 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_canvas.xml" value="0.176" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_canvas_drawer.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_file_creation.xml" value="0.24975704567541301" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_main.xml" value="0.32614213197969544" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/app_bar_canvas_drawer.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/content_canvas_drawer.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_home.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toggle_theme.xml" value="0.24954710144927536" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toolbar.xml" value="0.264" />
-        <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.19791666666666666" />
-        <entry key="app/src/main/res/layout/activity_canvas.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/activity_canvas_drawer.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/activity_file_creation.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/app_bar_canvas_drawer.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/content_canvas_drawer.xml" value="0.34270833333333334" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/fragment_toggle_theme.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/fragment_toolbar.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/layout/nav_header_canvas_drawer.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/menu/activity_canvas_drawer_drawer.xml" value="0.18177083333333333" />
-        <entry key="app/src/main/res/menu/canvas_drawer.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/nav_header_canvas_drawer.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>
