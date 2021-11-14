@@ -15,9 +15,6 @@
             android:label="@string/title_activity_canvas_drawer"
             android:theme="@style/Theme.TeamDolphin.NoActionBar" />
         <activity
-            android:name=".Canvas"
-            android:exported="true" />
-        <activity
             android:name=".FileCreation"
             android:exported="false" />
         <activity
