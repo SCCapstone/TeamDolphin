@@ -17,4 +17,13 @@
         <item name="backgroundColor">@color/color_primaryLight</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="Theme.TeamDolphin.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TeamDolphin.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TeamDolphin.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

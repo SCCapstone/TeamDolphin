@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CanvasDrawer">
+
+    <!-- The toolbar is present on this page, behind the AppBar -->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/appbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp"
+        android:name="com.example.teamdolphin.ToolbarFragment"
+        tools:layout="@layout/fragment_toolbar" />
+
+    <!-- This makes the appbar for the canvas tools-->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.TeamDolphin.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/color_secondaryLight"
+            app:popupTheme="@style/Theme.TeamDolphin.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_canvas_drawer" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
