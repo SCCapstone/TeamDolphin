@@ -16,9 +16,16 @@ class MyCanvas(context: Context): View(context) {
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
+        if(::bitmap1.isInitialized)bitmap1.recycle()
+
         bitmap1 = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         canvas1 = Canvas(bitmap1)
 
         canvas1.drawColor(backcolor)
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        canvas?.drawBitmap(bitmap1, 0f, 0f, null)
     }
 }

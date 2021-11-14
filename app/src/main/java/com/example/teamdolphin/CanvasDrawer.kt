@@ -2,7 +2,9 @@ package com.example.teamdolphin
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
+import android.view.View.*
 import android.widget.Button
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -40,6 +42,9 @@ class CanvasDrawer : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        val myCanvas = MyCanvas(this)
+        myCanvas.systemUiVisibility= SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        setContentView(myCanvas)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
