@@ -40,11 +40,12 @@ class CanvasDrawer : AppCompatActivity() {
                 R.id.nav_home
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+
         val myCanvas = MyCanvas(this)
         myCanvas.systemUiVisibility= SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setContentView(myCanvas)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
