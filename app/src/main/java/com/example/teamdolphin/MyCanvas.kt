@@ -10,7 +10,10 @@ import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 
-private const val stroke_width = 6f
+//constant brush sizes
+private const val thin_stroke_width = 1f
+private const val medium_stroke_width = 6f
+private const val thick_stroke_width = 12f
 
 
 class MyCanvas(context: Context): View(context) {
@@ -30,7 +33,7 @@ class MyCanvas(context: Context): View(context) {
         isAntiAlias=true
         isDither=true
         style = Paint.Style.STROKE
-        strokeWidth=stroke_width
+        strokeWidth=medium_stroke_width
         strokeCap=Paint.Cap.ROUND
         strokeJoin=Paint.Join.ROUND
     }
@@ -72,10 +75,12 @@ class MyCanvas(context: Context): View(context) {
         return true
     }
 
+    //Method: on user unclicking reset the path
     private fun touchUP() {
         path.reset()
     }
 
+    //Method: on user moving while clicking put draw path on canvas
     private fun touchMove() {
         val dx = Math.abs(motionX-currentX)
         val dy = Math.abs(motionY-currentY)
@@ -89,6 +94,7 @@ class MyCanvas(context: Context): View(context) {
         invalidate()
     }
 
+    //Method: on user clicking canvas, reset path and set x,y coordinates for canvas drawing
     private fun touchStart() {
         path.reset()
         path.moveTo(motionX,motionY)
