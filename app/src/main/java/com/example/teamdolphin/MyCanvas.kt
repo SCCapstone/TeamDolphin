@@ -23,13 +23,13 @@ class MyCanvas(context: Context): View(context) {
     private lateinit var canvas1: Canvas
     private lateinit var bitmap1: Bitmap
 
-    //pen color
-    private val pencolor = ResourcesCompat.getColor(resources, R.color.black, null)
+    //brush color, intended to add helper method, current constant, black
+    private val brushcolor = ResourcesCompat.getColor(resources, R.color.black, null)
 
     private val touchTolerance = ViewConfiguration.get(context).scaledEdgeSlop
 
     private val paint = Paint().apply{
-        color=pencolor
+        color=brushcolor
         isAntiAlias=true
         isDither=true
         style = Paint.Style.STROKE
