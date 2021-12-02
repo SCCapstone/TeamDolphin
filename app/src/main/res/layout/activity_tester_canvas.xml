@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TesterCanvas">
+
+
+    <!-- This is a new version of the toolbar for a java implementation of the canvas -->
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/appbar_container2"
+            android:name="com.example.teamdolphin.ToolbarFragment"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_toolbar"
+            tools:layout_editor_absoluteX="-4dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#AAAAAA">
+
+            <ImageButton
+                android:id="@+id/button_undo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/undo_icon"
+                android:text="Undo" />
+
+            <ImageButton
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/save_icon"
+                android:text="Save" />
+
+            <ImageButton
+                android:id="@+id/button_brush"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/brush_24"
+                android:text="Stroke" />
+
+            <ImageButton
+                android:id="@+id/button_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/home_icon"
+                android:text="Stroke" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/rangebar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.example.teamdolphin.DrawView
+        android:id="@+id/draw_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

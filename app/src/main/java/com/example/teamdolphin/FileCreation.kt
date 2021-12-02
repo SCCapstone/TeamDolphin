@@ -21,7 +21,7 @@ class FileCreation : AppCompatActivity() {
         //This is a click listener for the button to navigate to CanvasDrawerPage
         val button = findViewById<Button>(R.id.button_create)
         button.setOnClickListener {
-            val intent = Intent(this, CanvasDrawer::class.java)
+            val intent = Intent(this, TesterCanvas::class.java)
             startActivity(intent)
         }
     }

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamDolphin">
         <activity
+            android:name=".TesterCanvas"
+            android:exported="true" />
+        <activity
             android:name=".CanvasDrawer"
             android:exported="true"
             android:label="@string/title_activity_canvas_drawer"
