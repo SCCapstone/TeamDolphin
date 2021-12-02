@@ -91,6 +91,15 @@ public class TesterCanvas extends AppCompatActivity{
                     //this method writes the files in storage
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream);
 
+                    //Creating the Toast and values
+                    Context context = getApplicationContext();
+                    CharSequence savedText = "Image Saved as .PNG";
+                    int duration= Toast.LENGTH_SHORT;
+
+                    //The actual toast message
+                    Toast toast = Toast.makeText(context,savedText,duration);
+                    toast.show();
+
                     // close the output stream after use
                     imageOutStream.close();
                 } catch (Exception e) {
