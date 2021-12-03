@@ -22,8 +22,10 @@ Download any emulator(phone version) through Android Studio and click the green 
 
 To create an APK file
 * Select "Build" option from top tabs of Android Studio
-* Hover over Build Bundle(s)/ APK(s)
-* Then choose Build APK
+* Click on Generate Signed Bundle or APK
+* Select APK and click next
+* create a new key or use a pre exisiting key
+* click on release and then finish
 
 # Testing
 
