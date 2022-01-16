@@ -2,6 +2,7 @@ package com.example.teamdolphin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -88,6 +90,15 @@ public class TesterCanvas extends AppCompatActivity{
 
                     //this method writes the files in storage
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream);
+
+                    //Creating the Toast and values
+                    Context context = getApplicationContext();
+                    CharSequence savedText = "Image Saved as .PNG";
+                    int duration= Toast.LENGTH_SHORT;
+
+                    //The actual toast message
+                    Toast toast = Toast.makeText(context,savedText,duration);
+                    toast.show();
 
                     // close the output stream after use
                     imageOutStream.close();

@@ -18,6 +18,18 @@
         android:name="com.example.teamdolphin.ToolbarFragment"
         tools:layout="@layout/fragment_toolbar" />
 
+    <View
+        android:id="@+id/colored_bar27"
+        android:layout_width="420dp"
+        android:layout_height="2dp"
+        android:background="#959595"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_container"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/text_createProject"
         android:layout_width="wrap_content"
