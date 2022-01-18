@@ -32,7 +32,9 @@ To create an APK file
 
 ## Testing Technology
 
-We are planning on using junit for testing.
+We are using JUnit for testing our functions logic and
+We are also using Expresso for behavioral tests
+As we progress developing this app, we will continue to add more JUnit and behavioral tests
 
 ## Running Tests
 
