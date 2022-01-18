@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 class FileCreation : AppCompatActivity() {
@@ -21,8 +23,15 @@ class FileCreation : AppCompatActivity() {
         //This is a click listener for the button to navigate to CanvasDrawerPage
         val button = findViewById<Button>(R.id.button_create)
         button.setOnClickListener {
-            val intent = Intent(this, TesterCanvas::class.java)
-            startActivity(intent)
+            var projectName = findViewById<EditText>(R.id.field_projectName)
+            if(Companion.projectNameIsValid(projectName.text.toString())){
+                Toast.makeText(this, "Opening "+projectName.text.toString(), Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, TesterCanvas::class.java)
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(this, "Enter a valid project name", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -34,5 +43,15 @@ class FileCreation : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.appbar_container, fragment)
         fragmentTransaction.commit()
+    }
+
+    companion object {
+        /*
+                This will test the input provided in EditText Field of Project name
+                ...String must not be empty
+                 */
+        fun projectNameIsValid(name: String): Boolean{
+            return name.isNotEmpty()
+        }
     }
 }
