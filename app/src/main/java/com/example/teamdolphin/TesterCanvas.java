@@ -1,5 +1,6 @@
 package com.example.teamdolphin;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -20,7 +21,10 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.slider.RangeSlider;
 
+import java.io.File;
 import java.io.OutputStream;
+
+
 
 public class TesterCanvas extends AppCompatActivity{
 
@@ -74,13 +78,24 @@ public class TesterCanvas extends AppCompatActivity{
                 ContentValues contentValues = new ContentValues();
 
                 //name of file current a preset
-                contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, "dolphinArtImage.png");
+                String projectName = FileCreation.Companion.getProjectNameString() + ".png";
+                contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, projectName);
 
                 //filetype that we will be using now PNG
                 contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
 
                 //On Phone location of where file will be saved
-                contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+                File pictureFolder = Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES
+                );
+                //Makes the DolphinArt Projects folder
+                File mediaStorageDir =  new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"DolphinArt Projects");
+                if(!mediaStorageDir.exists())
+                    mediaStorageDir.mkdirs();
+
+
+                //Environment.DIRECTORY_PICTURES
+                contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/" + "DolphinArt Projects");
 
                 //get the Uri of the file which is to be created in the storage
                 Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
@@ -93,7 +108,7 @@ public class TesterCanvas extends AppCompatActivity{
 
                     //Creating the Toast and values
                     Context context = getApplicationContext();
-                    CharSequence savedText = "Image Saved as .PNG";
+                    CharSequence savedText = "\"" + projectName + "\" Saved to Pictures\\DolphinArt Projects";
                     int duration= Toast.LENGTH_SHORT;
 
                     //The actual toast message
