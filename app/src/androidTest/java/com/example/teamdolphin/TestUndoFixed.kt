@@ -4,7 +4,7 @@ package com.example.teamdolphin
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -19,14 +19,14 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class TestUndo {
+class TestUndoFixed {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun testUndo() {
+    fun testUndoFixed() {
         val materialButton = onView(
             allOf(
                 withId(R.id.button), withText("New"),
@@ -42,6 +42,21 @@ class TestUndo {
         )
         materialButton.perform(click())
 
+        val appCompatEditText = onView(
+            allOf(
+                withId(R.id.field_projectName),
+                childAtPosition(
+                    childAtPosition(
+                        withId(android.R.id.content),
+                        0
+                    ),
+                    8
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatEditText.perform(replaceText("a"), closeSoftKeyboard())
+
         val materialButton2 = onView(
             allOf(
                 withId(R.id.button_create), withText("Create"),
@@ -50,7 +65,7 @@ class TestUndo {
                         withId(android.R.id.content),
                         0
                     ),
-                    8
+                    9
                 ),
                 isDisplayed()
             )
@@ -63,7 +78,7 @@ class TestUndo {
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.linear),
-                        1
+                        2
                     ),
                     0
                 ),
