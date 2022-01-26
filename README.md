@@ -36,8 +36,18 @@ We are using JUnit for testing our functions logic and
 We are also using Expresso for behavioral tests
 As we progress developing this app, we will continue to add more JUnit and behavioral tests
 
-## Running Tests
+Our Tests are located in the androidTest(Behavioral Tests) and Test(JUnit tests) folders:
+TeamDolphin/app/src/androidTest/java/com/example/teamdolphin
+TeamDolphin/app/src/test/java/com/example/teamdolphin
 
+
+## Running Tests
+To Run the Tests you must use Android Studio:
+
+Right click on the folder where the tests are located to run all the tests(Behavioral or JUnit)
+Right Click on individual test files to run a single test
+
+For Behavioral Tests: The Installed Phone will be launched(Pixel 2 API 30 is used)
 
 # Authors
 
