@@ -175,19 +175,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="50dp"
-        android:paddingTop="5dp"
         app:layout_constraintVertical_bias="1.0">
 
         <GridView
             android:id="@+id/homepage_gridView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:verticalSpacing="20dp"
-            android:horizontalSpacing="20dp"
-            android:numColumns="2">
+            android:columnWidth="100dp"
+            android:horizontalSpacing="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:minHeight="50dp"
+            android:numColumns="3">
         </GridView>
     </RelativeLayout>
 
