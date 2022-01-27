@@ -167,28 +167,29 @@
         app:strokeColor="@color/black"
         app:strokeWidth="0dp" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="560dp"
+        android:layout_height="540dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colored_bar5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="50dp"
+        android:paddingTop="5dp"
         app:layout_constraintVertical_bias="1.0">
 
-        <ScrollView
+        <GridView
+            android:id="@+id/homepage_gridView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:ignore="SpeakableTextPresentCheck">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
-    </LinearLayout>
+            android:verticalSpacing="20dp"
+            android:horizontalSpacing="20dp"
+            android:numColumns="2">
+        </GridView>
+    </RelativeLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_toggleThemeButton"
