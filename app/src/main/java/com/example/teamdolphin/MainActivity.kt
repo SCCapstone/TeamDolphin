@@ -21,9 +21,6 @@ import kotlinx.coroutines.withContext
 import java.util.jar.Manifest
 import android.widget.GridView
 
-
-
-
 //This is the Home Page
 class MainActivity : AppCompatActivity() {
     lateinit var rs:Cursor
@@ -58,11 +55,17 @@ class MainActivity : AppCompatActivity() {
     private fun listImages() {
         var cols = listOf<String>(MediaStore.Images.Thumbnails.DATA).toTypedArray()
         rs = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,  cols,null,null, null)!!
-        if(rs?.moveToNext()!!)
-            Toast.makeText(applicationContext, rs?.getString(0), Toast.LENGTH_LONG).show()
+        //if(rs?.moveToNext()!!)
+            //Toast.makeText(applicationContext, rs?.getString(0), Toast.LENGTH_LONG).show()
         var gridView: GridView = findViewById(R.id.homepage_gridView)
         gridView.adapter = ImageAdapter(applicationContext)
-        print("12345")
+
+        gridView.setOnItemClickListener{
+                _, _, i, _ ->
+            rs.moveToPosition(i)
+            var path = rs.getString(0)
+            Toast.makeText(this, "Clicked on: $path", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
@@ -90,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             var iv = ImageView(context)
             rs.moveToPosition(p0)
             var path = rs.getString(0)
+            println("12345 "+rs.getString(0))
             var bitmap = BitmapFactory.decodeFile(path)
             iv.setImageBitmap(bitmap)
             iv.setPadding(20, 20, 20, 20)
