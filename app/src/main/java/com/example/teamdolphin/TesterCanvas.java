@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -32,7 +33,10 @@ public class TesterCanvas extends AppCompatActivity{
     private DrawView paint;
 
     //current functionality of canvas with SEMESTER 1 Build
-    private ImageButton undo,save,brush,home;
+    private ImageButton undo,save,brush,home, dropdown;
+
+    private ImageButton eraser, colorPicker, pen, eyeDropper;
+    private ImageButton selection, paintBucket, colorPreview, shapeTool;
 
     //inited rangeslider object for brush stroke
     private RangeSlider rangeSlider;
@@ -49,6 +53,20 @@ public class TesterCanvas extends AppCompatActivity{
         save = (ImageButton) findViewById(R.id.button_save);
         brush = (ImageButton) findViewById(R.id.button_brush);
         home = (ImageButton) findViewById(R.id.button_home);
+
+        //second row tools for canvas UI
+        eraser = (ImageButton) findViewById(R.id.button_eraser);
+        colorPicker = (ImageButton) findViewById(R.id.button_color);
+        pen = (ImageButton) findViewById(R.id.button_pen);
+        eyeDropper = (ImageButton) findViewById(R.id.button_eyedropper);
+
+        //third row tools for canvas UI
+        selection = (ImageButton) findViewById(R.id.button_selection);
+        paintBucket = (ImageButton) findViewById(R.id.button_paintbucket);
+        colorPreview = (ImageButton) findViewById(R.id.button_colorpreview);
+        shapeTool = (ImageButton) findViewById(R.id.button_shape);
+
+        dropdown = (ImageButton) findViewById(R.id.button_menu);
 
         //The onclick listeners for each button
 
@@ -171,6 +189,22 @@ public class TesterCanvas extends AppCompatActivity{
                 int width = paint.getMeasuredWidth();
                 int height = paint.getMeasuredHeight();
                 paint.init(height, width);
+            }
+        });
+
+        //Make Full Menu Visible and Hidden
+        dropdown.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view)
+            {
+                if(eraser.getVisibility() == view.VISIBLE) {
+                    eraser.setVisibility(View.GONE);
+                    selection.setVisibility(View.GONE);
+                }
+                else {
+                    eraser.setVisibility(View.VISIBLE);
+                    selection.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

@@ -76,6 +76,92 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/CanvasUIRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#AAAAAA"
+            android:visibility="gone" >
+
+            <ImageButton
+                android:id="@+id/button_eraser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/eraser_icon"
+                android:visibility="gone"
+                android:text="Undo" />
+
+            <ImageButton
+                android:id="@+id/button_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/color_picker_icon"
+                android:text="Save" />
+
+            <ImageButton
+                android:id="@+id/button_pen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/pen_icon"
+                android:text="Stroke" />
+
+            <ImageButton
+                android:id="@+id/button_eyedropper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/eyedropper_icon"
+                android:text="Stroke" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/CanvasUIRow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#AAAAAA"
+            android:visibility="gone" >
+
+            <ImageButton
+                android:id="@+id/button_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/select_icon"
+                android:visibility="gone"
+                android:text="Undo" />
+
+            <ImageButton
+                android:id="@+id/button_paintbucket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/paintbucket_icon"
+                android:text="Save" />
+
+            <ImageButton
+                android:id="@+id/button_colorpreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/color_preview_icon"
+                android:text="Stroke" />
+
+            <ImageButton
+                android:id="@+id/button_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/shapes_icon"
+                android:text="Stroke" />
+        </LinearLayout>
+
+
+        <!-- Size Slider for the Brush Tool -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -87,7 +173,26 @@
                 android:visibility="gone" />
         </LinearLayout>
 
+        <!-- DropDown Button for the canvas -->
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#AAAAAA">
+
+            <ImageButton
+                android:id="@+id/button_menu"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/arrow_drop_down"
+                android:text="Undo" />
+            />
+        </LinearLayout>
+
     </LinearLayout>
+
+
 
     <com.example.teamdolphin.DrawView
         android:id="@+id/draw_view"
