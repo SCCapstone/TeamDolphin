@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import android.content.ContentValues;
@@ -68,6 +70,15 @@ public class TesterCanvas extends AppCompatActivity{
 
         dropdown = (ImageButton) findViewById(R.id.button_menu);
 
+        //If picture already exists, import it
+        String projectName = FileCreation.Companion.getProjectNameString() + ".png";
+        String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/DolphinArt Projects/" + projectName;
+        File myFile = new File(duplicateFile);
+        if(myFile.exists()) {
+            System.out.println("The File Exists");
+            paint.importImage(duplicateFile);
+        }
+
         //The onclick listeners for each button
 
         //using the drawview function, remove most recent stroke
@@ -117,6 +128,15 @@ public class TesterCanvas extends AppCompatActivity{
 
                 //get the Uri of the file which is to be created in the storage
                 Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
+                //if the file already exists, overwrite it.
+                String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/DolphinArt Projects/" + projectName;
+                File myFile = new File(duplicateFile);
+                if(myFile.exists())
+                {
+                    myFile.delete();
+                }
+
                 try {
                     //open the output stream with the above uri
                     imageOutStream = getContentResolver().openOutputStream(uri);
