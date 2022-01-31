@@ -198,12 +198,29 @@ public class TesterCanvas extends AppCompatActivity{
             public void onClick(View view)
             {
                 if(eraser.getVisibility() == view.VISIBLE) {
+
                     eraser.setVisibility(View.GONE);
+                    colorPicker.setVisibility(View.GONE);
+                    pen.setVisibility(View.GONE);
+                    eyeDropper.setVisibility(View.GONE);
+
                     selection.setVisibility(View.GONE);
+                    paintBucket.setVisibility(View.GONE);
+                    colorPreview.setVisibility(View.GONE);
+                    shapeTool.setVisibility(View.GONE);
+
                 }
                 else {
+
                     eraser.setVisibility(View.VISIBLE);
+                    colorPicker.setVisibility(View.VISIBLE);
+                    pen.setVisibility(View.VISIBLE);
+                    eyeDropper.setVisibility(View.VISIBLE);
+
                     selection.setVisibility(View.VISIBLE);
+                    paintBucket.setVisibility(View.VISIBLE);
+                    colorPreview.setVisibility(View.VISIBLE);
+                    shapeTool.setVisibility(View.VISIBLE);
                 }
             }
         });
