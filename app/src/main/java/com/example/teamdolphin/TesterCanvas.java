@@ -208,6 +208,7 @@ public class TesterCanvas extends AppCompatActivity{
                     paintBucket.setVisibility(View.GONE);
                     colorPreview.setVisibility(View.GONE);
                     shapeTool.setVisibility(View.GONE);
+                    home.setVisibility(View.GONE);
 
                 }
                 else {
@@ -221,6 +222,7 @@ public class TesterCanvas extends AppCompatActivity{
                     paintBucket.setVisibility(View.VISIBLE);
                     colorPreview.setVisibility(View.VISIBLE);
                     shapeTool.setVisibility(View.VISIBLE);
+                    home.setVisibility(View.VISIBLE);
                 }
             }
         });
