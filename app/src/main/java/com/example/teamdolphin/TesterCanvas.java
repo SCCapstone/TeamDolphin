@@ -25,6 +25,8 @@ import com.google.android.material.slider.RangeSlider;
 import java.io.File;
 import java.io.OutputStream;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 
 
 public class TesterCanvas extends AppCompatActivity{
@@ -35,11 +37,16 @@ public class TesterCanvas extends AppCompatActivity{
     //current functionality of canvas with SEMESTER 1 Build
     private ImageButton undo,save,brush,home, dropdown;
 
+    //added buttons for the current UI of Canvas
     private ImageButton eraser, colorPicker, pen, eyeDropper;
     private ImageButton selection, paintBucket, colorPreview, shapeTool;
 
     //inited rangeslider object for brush stroke
     private RangeSlider rangeSlider;
+
+    //used for the colors
+    private int localColor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +75,9 @@ public class TesterCanvas extends AppCompatActivity{
 
         dropdown = (ImageButton) findViewById(R.id.button_menu);
 
+
         //The onclick listeners for each button
+        localColor = 0;
 
         //using the drawview function, remove most recent stroke
         undo.setOnClickListener(new View.OnClickListener()
@@ -226,5 +235,37 @@ public class TesterCanvas extends AppCompatActivity{
                 }
             }
         });
+
+        //Color Picker using the public library
+        colorPicker.setOnClickListener(new View.OnClickListener()
+                                       {
+                                           @Override
+                                           public void onClick(View v) {
+                                               //open the color picker dialog
+                                               colorPickerDialogue();
+                                           }
+                                       }
+        );
+    }
+
+    //method for color picker dialogue from library
+    public void colorPickerDialogue(){
+        final AmbilWarnaDialog colorDialogue = new AmbilWarnaDialog(this, localColor,
+                new AmbilWarnaDialog.OnAmbilWarnaListener(){
+            @Override
+                    public void onCancel (AmbilWarnaDialog dialog){
+
+            }
+            @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color){
+                paint.setColor(color);
+                localColor = color;
+
+                //currently does not function but is intended to make colorpreview
+                //change colors
+                //colorPreview.setBackgroundColor(localColor);
+            }
+                });
+        colorDialogue.show();
     }
 }
