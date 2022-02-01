@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import android.content.ContentValues;
@@ -25,8 +27,6 @@ import com.google.android.material.slider.RangeSlider;
 import java.io.File;
 import java.io.OutputStream;
 
-import yuku.ambilwarna.AmbilWarnaDialog;
-
 
 
 public class TesterCanvas extends AppCompatActivity{
@@ -37,16 +37,11 @@ public class TesterCanvas extends AppCompatActivity{
     //current functionality of canvas with SEMESTER 1 Build
     private ImageButton undo,save,brush,home, dropdown;
 
-    //added buttons for the current UI of Canvas
     private ImageButton eraser, colorPicker, pen, eyeDropper;
     private ImageButton selection, paintBucket, colorPreview, shapeTool;
 
     //inited rangeslider object for brush stroke
     private RangeSlider rangeSlider;
-
-    //used for the colors
-    private int localColor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +70,16 @@ public class TesterCanvas extends AppCompatActivity{
 
         dropdown = (ImageButton) findViewById(R.id.button_menu);
 
+        //If picture already exists, import it
+        String projectName = FileCreation.Companion.getProjectNameString() + ".png";
+        String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/DolphinArt Projects/" + projectName;
+        File myFile = new File(duplicateFile);
+        if(myFile.exists()) {
+            System.out.println("The File Exists");
+            paint.importImage(duplicateFile);
+        }
 
         //The onclick listeners for each button
-        localColor = 0;
 
         //using the drawview function, remove most recent stroke
         undo.setOnClickListener(new View.OnClickListener()
@@ -126,6 +128,15 @@ public class TesterCanvas extends AppCompatActivity{
 
                 //get the Uri of the file which is to be created in the storage
                 Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
+                //if the file already exists, overwrite it.
+                String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/DolphinArt Projects/" + projectName;
+                File myFile = new File(duplicateFile);
+                if(myFile.exists())
+                {
+                    myFile.delete();
+                }
+
                 try {
                     //open the output stream with the above uri
                     imageOutStream = getContentResolver().openOutputStream(uri);
@@ -235,37 +246,5 @@ public class TesterCanvas extends AppCompatActivity{
                 }
             }
         });
-
-        //Color Picker using the public library
-        colorPicker.setOnClickListener(new View.OnClickListener()
-                                       {
-                                           @Override
-                                           public void onClick(View v) {
-                                               //open the color picker dialog
-                                               colorPickerDialogue();
-                                           }
-                                       }
-        );
-    }
-
-    //method for color picker dialogue from library
-    public void colorPickerDialogue(){
-        final AmbilWarnaDialog colorDialogue = new AmbilWarnaDialog(this, localColor,
-                new AmbilWarnaDialog.OnAmbilWarnaListener(){
-            @Override
-                    public void onCancel (AmbilWarnaDialog dialog){
-
-            }
-            @Override
-                    public void onOk(AmbilWarnaDialog dialog, int color){
-                paint.setColor(color);
-                localColor = color;
-
-                //currently does not function but is intended to make colorpreview
-                //change colors
-                //colorPreview.setBackgroundColor(localColor);
-            }
-                });
-        colorDialogue.show();
     }
 }

@@ -64,7 +64,16 @@ class MainActivity : AppCompatActivity() {
                 _, _, i, _ ->
             rs.moveToPosition(i)
             var path = rs.getString(0)
-            Toast.makeText(this, "Clicked on: $path", Toast.LENGTH_SHORT).show()
+            var projectName = path.takeLastWhile{ it != '/' }
+            Toast.makeText(this, "Opening: "+ projectName, Toast.LENGTH_SHORT).show()
+            //Put code for opening file in canvas here
+
+            projectName = projectName.takeWhile{ it != '.' }
+            FileCreation.projectNameString = projectName
+
+            val intent = Intent(this, TesterCanvas::class.java)
+            startActivity(intent)
+
         }
     }
 

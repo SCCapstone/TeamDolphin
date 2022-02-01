@@ -2,6 +2,7 @@ package com.example.teamdolphin;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class DrawView extends View {
@@ -50,6 +53,19 @@ public class DrawView extends View {
 
         mPaint.setAlpha(0xff);
 
+    }
+
+    //import image to canvas (throws an exception)
+    public void importImage(String pathToImage)
+    {
+        try {
+            File myFile = new File(pathToImage);
+            Bitmap picture = BitmapFactory.decodeFile(myFile.getAbsolutePath());
+            mCanvas.setBitmap(picture);
+        } catch (Exception e) {
+            System.out.println("Bitmap creation failed");
+            System.out.println(pathToImage);
+        }
     }
 
     //instantiation of bitmap and brush settings
