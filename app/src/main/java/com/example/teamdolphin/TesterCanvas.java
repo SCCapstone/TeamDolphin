@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.os.Bundle;
 
 import android.content.ContentValues;
@@ -27,6 +25,8 @@ import com.google.android.material.slider.RangeSlider;
 import java.io.File;
 import java.io.OutputStream;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 
 
 public class TesterCanvas extends AppCompatActivity{
@@ -42,6 +42,9 @@ public class TesterCanvas extends AppCompatActivity{
 
     //inited rangeslider object for brush stroke
     private RangeSlider rangeSlider;
+
+    //stores the color to a local integer
+    private int localColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,14 +73,8 @@ public class TesterCanvas extends AppCompatActivity{
 
         dropdown = (ImageButton) findViewById(R.id.button_menu);
 
-        //If picture already exists, import it
-        String projectName = FileCreation.Companion.getProjectNameString() + ".png";
-        String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/DolphinArt Projects/" + projectName;
-        File myFile = new File(duplicateFile);
-        if(myFile.exists()) {
-            System.out.println("The File Exists");
-            paint.importImage(duplicateFile);
-        }
+        //set default color to black
+        localColor = 0;
 
         //The onclick listeners for each button
 
@@ -128,15 +125,6 @@ public class TesterCanvas extends AppCompatActivity{
 
                 //get the Uri of the file which is to be created in the storage
                 Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-
-                //if the file already exists, overwrite it.
-                String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/DolphinArt Projects/" + projectName;
-                File myFile = new File(duplicateFile);
-                if(myFile.exists())
-                {
-                    myFile.delete();
-                }
-
                 try {
                     //open the output stream with the above uri
                     imageOutStream = getContentResolver().openOutputStream(uri);
@@ -246,5 +234,31 @@ public class TesterCanvas extends AppCompatActivity{
                 }
             }
         });
+
+        //when colorPicker is pressed open dialog for color
+        colorPicker.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                //uses openColorDialogue to open Library Dialogue
+                openColorDialogue();
+            }
+        });
+    }
+
+    //method used to open the dialog provided by open source library
+    public void openColorDialogue(){
+        final AmbilWarnaDialog colorPickerDialogue = new AmbilWarnaDialog(this, localColor,
+                new AmbilWarnaDialog.OnAmbilWarnaListener(){
+            @Override
+                    public void onCancel(AmbilWarnaDialog dialog){
+
+            }
+            @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color){
+                localColor = color;
+                paint.setColor(color);
+            }
+                });
     }
 }
