@@ -167,28 +167,26 @@
         app:strokeColor="@color/black"
         app:strokeWidth="0dp" />
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="560dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/colored_bar5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="@+id/colored_bar7">
 
         <GridView
             android:id="@+id/homepage_gridView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:columnWidth="100dp"
-            android:horizontalSpacing="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:minHeight="50dp"
-            android:numColumns="3">
-        </GridView>
-    </RelativeLayout>
+            android:columnWidth="200dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:listSelector="#00000000"
+            android:numColumns="3"
+            android:stretchMode="columnWidth" />
+    </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_toggleThemeButton"

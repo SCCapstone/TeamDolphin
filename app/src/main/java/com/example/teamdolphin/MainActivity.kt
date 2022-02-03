@@ -1,25 +1,14 @@
 package com.example.teamdolphin
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.graphics.BitmapFactory
-import android.media.Image
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.graphics.createBitmap
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.util.jar.Manifest
-import android.widget.GridView
+import java.io.File
 
 //This is the Home Page
 class MainActivity : AppCompatActivity() {
@@ -52,20 +41,36 @@ class MainActivity : AppCompatActivity() {
             listImages()
     }
 
-    private fun listImages() {
-        var cols = listOf<String>(MediaStore.Images.Thumbnails.DATA).toTypedArray()
-        rs = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,  cols,null,null, null)!!
-        //if(rs?.moveToNext()!!)
-            //Toast.makeText(applicationContext, rs?.getString(0), Toast.LENGTH_LONG).show()
+    private fun listImages(){
+        var fileNames = mutableListOf<String>()
+        var filePaths = mutableListOf<String>()
+        var allFiles = emptyArray<File>()
+
+        //https://stackoverflow.com/questions/47726495/how-to-get-all-images-from-specific-folder/47726525
+        val folder = File(Environment.getExternalStorageDirectory().toString() + "/Pictures/DolphinArt Projects")
+        if (folder.exists()) {
+            //println("FolderLocation: "+folder.path)
+            allFiles = folder.listFiles { _, name ->
+                name.endsWith(".png")
+            }!!
+        }
+
+        for (file in allFiles){
+            fileNames.add(file.path.takeLastWhile{ it != '/' })
+            filePaths.add(file.path)
+            //println("FilePath: "+ file.path)
+            //println("FileName: "+ file.path.takeLastWhile{ it != '/' })
+        }
+
         var gridView: GridView = findViewById(R.id.homepage_gridView)
-        gridView.adapter = ImageAdapter(applicationContext)
+        gridView.adapter = ProjectAdapter(applicationContext, fileNames.toTypedArray(), filePaths.toTypedArray())
 
         gridView.setOnItemClickListener{
                 _, _, i, _ ->
-            rs.moveToPosition(i)
-            var path = rs.getString(0)
+            var path = filePaths[i]
+            Toast.makeText(this, "$path clicked", Toast.LENGTH_SHORT).show()
             var projectName = path.takeLastWhile{ it != '/' }
-            Toast.makeText(this, "Opening: "+ projectName, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Opening: $projectName", Toast.LENGTH_SHORT).show()
             //Put code for opening file in canvas here
 
             projectName = projectName.takeWhile{ it != '.' }
@@ -73,42 +78,6 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, TesterCanvas::class.java)
             startActivity(intent)
-
         }
-    }
-
-
-    //Adapter that helps inflate a view
-    inner class ImageAdapter : BaseAdapter{
-        lateinit var context: Context
-
-        constructor(context: Context){
-            this.context = context
-        }
-
-        override fun getCount(): Int {
-            return rs.count
-        }
-
-        override fun getItem(p0: Int): Any {
-            return p0
-        }
-
-        override fun getItemId(p0: Int): Long {
-            return p0.toLong()
-        }
-
-        override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-            var iv = ImageView(context)
-            rs.moveToPosition(p0)
-            var path = rs.getString(0)
-            println("12345 "+rs.getString(0))
-            var bitmap = BitmapFactory.decodeFile(path)
-            iv.setImageBitmap(bitmap)
-            iv.setPadding(20, 20, 20, 20)
-            iv.layoutParams = AbsListView.LayoutParams(GridView.AUTO_FIT, 500)
-            return iv
-        }
-
     }
 }
