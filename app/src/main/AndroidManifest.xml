@@ -9,19 +9,14 @@
     <application
 
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="DolphinArt"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/dolphinartlogo"
+        android:label="Dolphin Art"
+        android:roundIcon="@mipmap/dolphinartlogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamDolphin">
         <activity
             android:name=".TesterCanvas"
             android:exported="true" />
-        <activity
-            android:name=".CanvasDrawer"
-            android:exported="true"
-            android:label="@string/title_activity_canvas_drawer"
-            android:theme="@style/Theme.TeamDolphin.NoActionBar" />
         <activity
             android:name=".FileCreation"
             android:exported="false" />
