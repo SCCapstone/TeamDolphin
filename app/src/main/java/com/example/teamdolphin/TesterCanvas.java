@@ -260,5 +260,6 @@ public class TesterCanvas extends AppCompatActivity{
                 paint.setColor(color);
             }
                 });
+        colorPickerDialogue.show();
     }
 }
