@@ -25,6 +25,7 @@ import com.google.android.material.slider.RangeSlider;
 import java.io.File;
 import java.io.OutputStream;
 
+import kotlinx.coroutines.internal.ExceptionsConstuctorKt;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 
@@ -194,8 +195,11 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onGlobalLayout() {
                 paint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int width = paint.getMeasuredWidth();
-                int height = paint.getMeasuredHeight();
+                Intent intent = getIntent();
+                int width = intent.getIntExtra("width", paint.getMeasuredWidth());
+                int height = intent.getIntExtra("height", paint.getMeasuredHeight());
+//                int width = paint.getMeasuredWidth();
+//                int height = paint.getMeasuredHeight();
                 paint.init(height, width);
             }
         });

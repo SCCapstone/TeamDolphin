@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             projectName = projectName.takeWhile{ it != '.' }
             FileCreation.projectNameString = projectName
 
-            val intent = Intent(this, TesterCanvas::class.java)
+            val intent = Intent(this, TesterCanvas()::class.java)
             startActivity(intent)
         }
     }

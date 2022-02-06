@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-
+import kotlin.math.absoluteValue
 
 
 class FileCreation : AppCompatActivity() {
@@ -26,10 +26,19 @@ class FileCreation : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button_create)
         button.setOnClickListener {
             var projectName = findViewById<EditText>(R.id.field_projectName)
+            var projectWidth = findViewById<EditText>(R.id.field_width)
+            var projectHeight = findViewById<EditText>(R.id.field_height)
+
             projectNameString = projectName.text.toString()
+
             if(Companion.projectNameIsValid(projectName.text.toString())){
                 Toast.makeText(this, "Opening "+projectName.text.toString(), Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, TesterCanvas::class.java)
+                val intent = Intent(this, TesterCanvas()::class.java)
+
+                if(projectWidth.text.isNotEmpty()&&projectHeight.text.isNotEmpty()) {
+                    intent.putExtra("width", projectWidth.text.toString().toInt().absoluteValue)
+                    intent.putExtra("height", projectHeight.text.toString().toInt().absoluteValue)
+                }
                 startActivity(intent)
             }
             else{
