@@ -11,7 +11,7 @@
 
     <View
         android:id="@+id/colored_bar7"
-        android:layout_width="420dp"
+        android:layout_width="match_parent"
         android:layout_height="560dp"
         android:alpha="0.5"
         android:background="#C8C8C8"
