@@ -47,6 +47,8 @@ public class TesterCanvas extends AppCompatActivity{
     //stores the color to a local integer
     private int localColor;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +80,16 @@ public class TesterCanvas extends AppCompatActivity{
         localColor = 0;
 
         //The onclick listeners for each button
+
+        //If picture already exists, import it
+        String projectName = FileCreation.Companion.getProjectNameString() + ".png";
+        String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/DolphinArt Projects/" + projectName;
+        File myFile = new File(duplicateFile);
+        if(myFile.exists()) {
+            System.out.println("The File Exists");
+            paint.importImage(duplicateFile);
+        }
+
 
         //using the drawview function, remove most recent stroke
         undo.setOnClickListener(new View.OnClickListener()

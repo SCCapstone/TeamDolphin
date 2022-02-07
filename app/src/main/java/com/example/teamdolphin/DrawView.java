@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -58,14 +59,26 @@ public class DrawView extends View {
     //import image to canvas (throws an exception)
     public void importImage(String pathToImage)
     {
-        try {
-            File myFile = new File(pathToImage);
-            Bitmap picture = BitmapFactory.decodeFile(myFile.getAbsolutePath());
-            mCanvas.setBitmap(picture);
-        } catch (Exception e) {
-            System.out.println("Bitmap creation failed");
-            System.out.println(pathToImage);
+        File myFile = new File(pathToImage);
+        System.out.println("pathToImage: " + pathToImage);
+        Bitmap picture = BitmapFactory.decodeFile(myFile.getAbsolutePath());
+        Bitmap mutablepicture = picture.copy(Bitmap.Config.ARGB_8888, true);
+
+        //If this doesnt say "Problem:..." than the bitmap we created actually has something in it.
+        Bitmap emptyBitmap = Bitmap.createBitmap(picture.getWidth(), picture.getHeight(), picture.getConfig());
+        if (picture.sameAs(emptyBitmap)) {
+            System.out.println("Problem: the bitmap we made is empty");
         }
+
+        //mCanvas = new Canvas();
+        //val bmp = BitmapFactory.decodeFile(filesPaths[p])
+        //mageView?.setImageBitmap(bmp)
+        //init(picture.getHeight(), picture.getWidth());
+        //mCanvas = new Canvas(mutablepicture);
+
+        //mCanvas.drawBitmap(mutablepicture,0,0,null); //This one should work
+
+        //mCanvas.setBitmap(mutablepicture);
     }
 
     //instantiation of bitmap and brush settings

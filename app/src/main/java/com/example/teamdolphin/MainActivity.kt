@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, TesterCanvas()::class.java)
             startActivity(intent)
+
         }
     }
 }
