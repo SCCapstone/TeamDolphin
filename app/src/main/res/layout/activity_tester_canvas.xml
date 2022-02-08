@@ -190,12 +190,19 @@
 
     </LinearLayout>
 
-    <com.example.teamdolphin.DrawView
-        android:id="@+id/draw_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/linear"
-        android:layout_centerInParent="true"
-        android:background="@color/color_secondaryLight"/>
+        android:scaleY="1"
+        android:scaleX="1"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/canvasbackground">
+        <com.example.teamdolphin.DrawView
+            android:id="@+id/draw_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </RelativeLayout>
