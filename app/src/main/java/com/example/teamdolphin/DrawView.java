@@ -82,16 +82,22 @@ public class DrawView extends View {
     }
 
     //instantiation of bitmap and brush settings
-    public void init(int height, int width) {
+    public void init(int height, int width, int background) {
 
         mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
-
+        System.out.println("Background 12345: "+background);
         //set the initial color of brush
-        currentColor = Color.BLACK;
+        if(background==Color.BLACK)
+            currentColor = Color.WHITE;
+        else
+            currentColor = Color.BLACK;
 
         //set the initial size of brush
         strokeWidth = 16;
+
+        //sets default color of canvas
+        mCanvas.drawColor(background);
     }
 
     //set the initial color of the brush
@@ -122,11 +128,6 @@ public class DrawView extends View {
     protected void onDraw(Canvas canvas) {
         //saves current canvas state
         canvas.save();
-
-        //Variable for background color
-        int backgroundColor = Color.WHITE;
-        //sets default color of canvas
-        mCanvas.drawColor(backgroundColor);
 
         //iterates through the list of paths
         for (Stroke fp : paths) {

@@ -143,7 +143,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/fc_dark_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -152,7 +152,7 @@
             tools:layout_editor_absoluteY="454dp" />
 
         <RadioButton
-            android:id="@+id/radio_background"
+            android:id="@+id/fc_light_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Light"

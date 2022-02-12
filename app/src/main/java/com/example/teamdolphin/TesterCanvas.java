@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.content.ContentValues;
@@ -210,9 +211,8 @@ public class TesterCanvas extends AppCompatActivity{
                 Intent intent = getIntent();
                 int width = intent.getIntExtra("width", paint.getMeasuredWidth());
                 int height = intent.getIntExtra("height", paint.getMeasuredHeight());
-//                int width = paint.getMeasuredWidth();
-//                int height = paint.getMeasuredHeight();
-                paint.init(height, width);
+                int background = intent.getIntExtra("background", Color.WHITE);
+                paint.init(height, width, background);
             }
         });
 

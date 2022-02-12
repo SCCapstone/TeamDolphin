@@ -1,12 +1,10 @@
 package com.example.teamdolphin
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import kotlin.math.absoluteValue
 
@@ -28,8 +26,14 @@ class FileCreation : AppCompatActivity() {
             var projectName = findViewById<EditText>(R.id.field_projectName)
             var projectWidth = findViewById<EditText>(R.id.field_width)
             var projectHeight = findViewById<EditText>(R.id.field_height)
-
+            var darkBackground = findViewById<RadioButton>(R.id.fc_dark_button)
+            var backgroundColor: Int
             projectNameString = projectName.text.toString()
+
+            backgroundColor = if(darkBackground.isChecked)
+                Color.BLACK
+            else
+                Color.WHITE
 
             if(Companion.projectNameIsValid(projectName.text.toString())){
                 Toast.makeText(this, "Opening "+projectName.text.toString(), Toast.LENGTH_SHORT).show()
@@ -39,6 +43,7 @@ class FileCreation : AppCompatActivity() {
                     intent.putExtra("width", projectWidth.text.toString().toInt().absoluteValue)
                     intent.putExtra("height", projectHeight.text.toString().toInt().absoluteValue)
                 }
+                intent.putExtra("background", backgroundColor)
                 startActivity(intent)
             }
             else{
