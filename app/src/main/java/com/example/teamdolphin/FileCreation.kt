@@ -38,16 +38,27 @@ class FileCreation : AppCompatActivity() {
             else
                 Color.WHITE
 
-            if(Companion.projectNameIsValid(projectName.text.toString())){
-                Toast.makeText(this, "Opening "+projectName.text.toString(), Toast.LENGTH_SHORT).show()
+            var appropriateSize: Boolean = true
+
+            if(projectNameIsValid(projectName.text.toString())){
                 val intent = Intent(this, TesterCanvas()::class.java)
 
                 if(projectWidth.text.isNotEmpty()&&projectHeight.text.isNotEmpty()) {
                     intent.putExtra("width", projectWidth.text.toString().toInt().absoluteValue)
                     intent.putExtra("height", projectHeight.text.toString().toInt().absoluteValue)
+                    if(projectWidth.text.toString().toInt().absoluteValue<500 ||
+                        projectWidth.text.toString().toInt().absoluteValue>2000 ||
+                        projectHeight.text.toString().toInt().absoluteValue<500 ||
+                        projectHeight.text.toString().toInt().absoluteValue>2000){
+                        Toast.makeText(this, "Enter a valid width and height(500-2000)", Toast.LENGTH_SHORT).show()
+                        appropriateSize = false
+                    }
                 }
                 intent.putExtra("background", backgroundColor)
-                startActivity(intent)
+                if(appropriateSize){
+                    Toast.makeText(this, "Opening "+projectName.text.toString(), Toast.LENGTH_SHORT).show()
+                    startActivity(intent)
+                }
             }
             else{
                 Toast.makeText(this, "Enter a valid project name", Toast.LENGTH_SHORT).show()
@@ -70,7 +81,7 @@ class FileCreation : AppCompatActivity() {
                 This will test the input provided in EditText Field of Project name
                 ...String must not be empty
                  */
-        public var projectNameString = ""
+        var projectNameString = ""
         fun projectNameIsValid(name: String): Boolean{
             return name.isNotEmpty()
         }
