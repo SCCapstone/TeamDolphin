@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_primaryLight"
     tools:context=".FileCreation">
 
     <!-- Fragment Container that will store toolbar of the app -->
@@ -56,7 +57,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
-        android:background="@color/color_primaryLight"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
@@ -146,7 +147,6 @@
             android:id="@+id/fc_dark_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="Dark"
             tools:layout_editor_absoluteX="206dp"
             tools:layout_editor_absoluteY="454dp" />
@@ -155,6 +155,7 @@
             android:id="@+id/fc_light_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="Light"
             tools:layout_editor_absoluteX="156dp"
             tools:layout_editor_absoluteY="454dp" />

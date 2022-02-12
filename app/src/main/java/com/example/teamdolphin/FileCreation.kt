@@ -2,10 +2,14 @@ package com.example.teamdolphin
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
+import java.security.AccessController.getContext
 import kotlin.math.absoluteValue
 
 
@@ -27,10 +31,9 @@ class FileCreation : AppCompatActivity() {
             var projectWidth = findViewById<EditText>(R.id.field_width)
             var projectHeight = findViewById<EditText>(R.id.field_height)
             var darkBackground = findViewById<RadioButton>(R.id.fc_dark_button)
-            var backgroundColor: Int
             projectNameString = projectName.text.toString()
 
-            backgroundColor = if(darkBackground.isChecked)
+            var backgroundColor: Int = if(darkBackground.isChecked)
                 Color.BLACK
             else
                 Color.WHITE
@@ -50,16 +53,16 @@ class FileCreation : AppCompatActivity() {
                 Toast.makeText(this, "Enter a valid project name", Toast.LENGTH_SHORT).show()
             }
         }
-    }
 
-    /*
-        This method takes in a fragment and adds it to a container view
-     */
-    private fun addFragment(fragment:Fragment){
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.appbar_container, fragment)
-        fragmentTransaction.commit()
+        val radioGroup = findViewById<View>(R.id.radioGroup) as RadioGroup
+        radioGroup.setOnCheckedChangeListener { _, _ ->
+            var layout = findViewById<FragmentContainerView>(R.id.image_preview_container)
+            var darkBackground = findViewById<RadioButton>(R.id.fc_dark_button)
+            if (darkBackground.isChecked) {
+                layout.setBackgroundColor(Color.BLACK)
+            } else
+                layout.setBackgroundColor(Color.WHITE)
+        }
     }
 
     companion object {
