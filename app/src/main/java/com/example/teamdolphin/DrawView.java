@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -56,48 +58,43 @@ public class DrawView extends View {
 
     }
 
-    //import image to canvas (throws an exception)
-    public void importImage(String pathToImage)
-    {
-        File myFile = new File(pathToImage);
-        System.out.println("pathToImage: " + pathToImage);
-        Bitmap picture = BitmapFactory.decodeFile(myFile.getAbsolutePath());
-        Bitmap mutablepicture = picture.copy(Bitmap.Config.ARGB_8888, true);
-
-        //If this doesnt say "Problem:..." than the bitmap we created actually has something in it.
-        Bitmap emptyBitmap = Bitmap.createBitmap(picture.getWidth(), picture.getHeight(), picture.getConfig());
-        if (picture.sameAs(emptyBitmap)) {
-            System.out.println("Problem: the bitmap we made is empty");
-        }
-
-        //mCanvas = new Canvas();
-        //val bmp = BitmapFactory.decodeFile(filesPaths[p])
-        //mageView?.setImageBitmap(bmp)
-        //init(picture.getHeight(), picture.getWidth());
-        //mCanvas = new Canvas(mutablepicture);
-
-        //mCanvas.drawBitmap(mutablepicture,0,0,null); //This one should work
-
-        //mCanvas.setBitmap(mutablepicture);
-    }
-
     //instantiation of bitmap and brush settings
-    public void init(int height, int width, int background) {
+    public void init(int height, int width, int background, String path) {
 
-        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(mBitmap);
-        System.out.println("Background 12345: "+background);
-        //set the initial color of brush
-        if(background==Color.BLACK)
-            currentColor = Color.WHITE;
-        else
-            currentColor = Color.BLACK;
+        //This condition applies if the user is clicking on already made project
+        if(path!=null) {
+            Bitmap imageBitmap = BitmapFactory.decodeFile(path);
+            height = imageBitmap.getHeight();
+            width = imageBitmap.getWidth();
+            mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            imageBitmap = imageBitmap.copy(Bitmap.Config.ARGB_8888, true);
+            mCanvas = new Canvas(mBitmap);
+            mCanvas.drawBitmap(imageBitmap, 0f, 0f, null);
+            //set the initial color of brush
+            if (background == Color.BLACK)
+                currentColor = Color.WHITE;
+            else
+                currentColor = Color.BLACK;
 
-        //set the initial size of brush
-        strokeWidth = 16;
+            //set the initial size of brush
+            strokeWidth = 16;
+        }
+        //This condition applies to newly made projects using FileCreation Page
+        else{
+            mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            mCanvas = new Canvas(mBitmap);
+            //set the initial color of brush
+            if(background==Color.BLACK)
+                currentColor = Color.WHITE;
+            else
+                currentColor = Color.BLACK;
 
-        //sets default color of canvas
-        mCanvas.drawColor(background);
+            //set the initial size of brush
+            strokeWidth = 16;
+
+            //sets default color of canvas
+            mCanvas.drawColor(background);
+        }
     }
 
     //set the initial color of the brush

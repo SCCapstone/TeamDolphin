@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -88,7 +89,7 @@ public class TesterCanvas extends AppCompatActivity{
         File myFile = new File(duplicateFile);
         if(myFile.exists()) {
             System.out.println("The File Exists");
-            paint.importImage(duplicateFile);
+            //paint.importImage(duplicateFile);
         }
 
 
@@ -209,10 +210,26 @@ public class TesterCanvas extends AppCompatActivity{
             public void onGlobalLayout() {
                 paint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 Intent intent = getIntent();
-                int width = intent.getIntExtra("width", paint.getMeasuredWidth());
-                int height = intent.getIntExtra("height", paint.getMeasuredHeight());
-                int background = intent.getIntExtra("background", Color.WHITE);
-                paint.init(height, width, background);
+
+                int width, height, background;
+                String path;
+
+                try{
+                    width = intent.getIntExtra("width", paint.getMeasuredWidth());
+                    height = intent.getIntExtra("height", paint.getMeasuredHeight());
+                    background = intent.getIntExtra("background", Color.WHITE);
+                }catch (Resources.NotFoundException e){
+                    width = 0;
+                    height = 0;
+                    background = -1;
+                }
+
+                try{
+                    path = intent.getStringExtra("imagePath");
+                }catch (Resources.NotFoundException e){
+                    path = null;
+                }
+                paint.init(height, width, background, path);
             }
         });
 

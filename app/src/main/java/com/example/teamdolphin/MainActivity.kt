@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             FileCreation.projectNameString = projectName
 
             val intent = Intent(this, TesterCanvas()::class.java)
+            intent.putExtra("imagePath", path)
             startActivity(intent)
 
         }
