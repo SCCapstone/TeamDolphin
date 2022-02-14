@@ -1,14 +1,19 @@
 package com.example.teamdolphin
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
 import android.os.Environment
-import android.widget.*
+import android.widget.Button
+import android.widget.GridView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import java.io.File
+
 
 //This is the Home Page
 class MainActivity : AppCompatActivity() {
@@ -79,6 +84,42 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, TesterCanvas()::class.java)
             intent.putExtra("imagePath", path)
             startActivity(intent)
+
+        }
+
+        gridView.setOnItemLongClickListener { _, _, i, _ ->
+            //Toast.makeText(this, "Opening:", Toast.LENGTH_SHORT).show()
+            var name = fileNames[i]
+            var path = filePaths[i]
+            val dialogClickListener =
+                DialogInterface.OnClickListener { _, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> {deleteProject(path, name)}
+                        DialogInterface.BUTTON_NEGATIVE -> {}
+                    }
+                }
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to delete $name?")
+                .setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show()
+
+            return@setOnItemLongClickListener true
+        }
+
+    }
+
+    private fun deleteProject(path: String, name: String){
+        val file = File(path)
+        if(file.exists()){
+            val result = file.delete()
+            if (result) {
+                Toast.makeText(this, "Deleted $name", Toast.LENGTH_SHORT).show()
+                listImages()
+            } else {
+                Toast.makeText(this, "An Error occurred while deleting the project!", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            Toast.makeText(this, "File does not exist.", Toast.LENGTH_SHORT).show()
 
         }
     }

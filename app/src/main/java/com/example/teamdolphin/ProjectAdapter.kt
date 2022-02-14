@@ -32,7 +32,7 @@ class ProjectAdapter(
         //println("Everything good until here3")
         return pos.toLong()
     }
-
+    
     override fun getView(p: Int, convertView: View?, parent: ViewGroup): View? {
         //println("Everything good until here4")
         var grid: View? = convertView
