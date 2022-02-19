@@ -46,11 +46,11 @@ class FileCreation : AppCompatActivity() {
                 if(projectWidth.text.isNotEmpty()&&projectHeight.text.isNotEmpty()) {
                     intent.putExtra("width", projectWidth.text.toString().toInt().absoluteValue)
                     intent.putExtra("height", projectHeight.text.toString().toInt().absoluteValue)
-                    if(projectWidth.text.toString().toInt().absoluteValue<500 ||
+                    if(projectWidth.text.toString().toInt().absoluteValue<1 ||
                         projectWidth.text.toString().toInt().absoluteValue>2000 ||
-                        projectHeight.text.toString().toInt().absoluteValue<500 ||
+                        projectHeight.text.toString().toInt().absoluteValue<1 ||
                         projectHeight.text.toString().toInt().absoluteValue>2000){
-                        Toast.makeText(this, "Enter a valid width and height(500-2000)", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Enter a valid width and height(1-2000)", Toast.LENGTH_SHORT).show()
                         appropriateSize = false
                     }
                 }

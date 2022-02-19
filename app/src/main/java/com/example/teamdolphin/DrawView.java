@@ -92,6 +92,11 @@ public class DrawView extends View {
             //set the initial size of brush
             strokeWidth = 16;
 
+            //moves the drawing area but not the white square...
+            int screenWidth = this.getWidth()/2;
+            int screenHeight = this.getHeight()/2;
+            //mCanvas.translate(100, 100);
+
             //sets default color of canvas
             mCanvas.drawColor(background);
         }
@@ -119,6 +124,21 @@ public class DrawView extends View {
     public Bitmap save() {
         return mBitmap;
     }
+
+    public void drag() {
+        //mCanvas.translate(100,100);
+        //does not work currently
+    }
+
+    public void setZoom(int zoom) {
+        int zoomFixed = (zoom * 5) +1;
+        mCanvas.save();
+        mCanvas.scale(zoomFixed, zoomFixed);
+        mCanvas.drawBitmap(mBitmap, mX, mY, mBitmapPaint);
+        mCanvas.restore();
+        // does not work
+    }
+
 
     //main method for drawing on canvas
     @Override

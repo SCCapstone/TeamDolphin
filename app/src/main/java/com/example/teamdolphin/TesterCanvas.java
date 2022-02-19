@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
@@ -42,9 +43,10 @@ public class TesterCanvas extends AppCompatActivity{
 
     private ImageButton eraser, colorPicker, pen, eyeDropper;
     private ImageButton selection, paintBucket, colorPreview, shapeTool;
+    private ImageButton drag, zoom, rotate;
 
     //inited rangeslider object for brush stroke
-    private RangeSlider rangeSlider;
+    private RangeSlider rangeSlider, rangeSliderZoom;
 
     //stores the color to a local integer
     private int localColor;
@@ -59,6 +61,7 @@ public class TesterCanvas extends AppCompatActivity{
         //getting the references needed to construct canvas page
         paint = (DrawView) findViewById(R.id.draw_view);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
+        rangeSliderZoom = (RangeSlider) findViewById(R.id.rangebarzoom);
         undo = (ImageButton) findViewById(R.id.button_undo);
         save = (ImageButton) findViewById(R.id.button_save);
         brush = (ImageButton) findViewById(R.id.button_brush);
@@ -75,6 +78,11 @@ public class TesterCanvas extends AppCompatActivity{
         paintBucket = (ImageButton) findViewById(R.id.button_paintbucket);
         colorPreview = (ImageButton) findViewById(R.id.button_colorpreview);
         shapeTool = (ImageButton) findViewById(R.id.button_shape);
+
+        //fourth row tools for canvas UI
+        drag = (ImageButton) findViewById(R.id.button_drag);
+        zoom = (ImageButton) findViewById(R.id.button_zoom);
+        rotate = (ImageButton) findViewById(R.id.button_rotate);
 
         dropdown = (ImageButton) findViewById(R.id.button_menu);
 
@@ -192,6 +200,27 @@ public class TesterCanvas extends AppCompatActivity{
             }
         });
 
+        rangeSliderZoom.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
+            {
+                paint.setZoom((int) value);
+            }
+        });
+
+        zoom.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(rangeSliderZoom.getVisibility() == view.VISIBLE)
+                    rangeSliderZoom.setVisibility(View.GONE);
+                else
+                    rangeSliderZoom.setVisibility(View.VISIBLE);
+
+            }
+        });
+
 
         //returns the user to the homepage
         home.setOnClickListener(new View.OnClickListener()
@@ -233,6 +262,15 @@ public class TesterCanvas extends AppCompatActivity{
             }
         });
 
+        //Make drag button drag the canvas
+        drag.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view)
+            {
+                paint.drag();
+            }
+        });
+
         //Make Full Menu Visible and Hidden
         dropdown.setOnClickListener(new View.OnClickListener()
         {
@@ -250,7 +288,9 @@ public class TesterCanvas extends AppCompatActivity{
                     colorPreview.setVisibility(View.GONE);
                     shapeTool.setVisibility(View.GONE);
                     home.setVisibility(View.GONE);
-
+                    drag.setVisibility(View.GONE);
+                    zoom.setVisibility(View.GONE);
+                    rotate.setVisibility(View.GONE);
                 }
                 else {
 
@@ -264,6 +304,10 @@ public class TesterCanvas extends AppCompatActivity{
                     colorPreview.setVisibility(View.VISIBLE);
                     shapeTool.setVisibility(View.VISIBLE);
                     home.setVisibility(View.VISIBLE);
+
+                    drag.setVisibility(View.VISIBLE);
+                    zoom.setVisibility(View.VISIBLE);
+                    rotate.setVisibility(View.VISIBLE);
                 }
             }
         });

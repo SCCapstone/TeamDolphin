@@ -164,6 +164,45 @@
                 android:text="Stroke"
                 android:visibility="gone"/>
 
+
+        </LinearLayout>
+
+
+        <!-- Size Slider for the Brush Tool -->
+        <LinearLayout
+            android:id="@+id/CanvasUIRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#AAAAAA"
+            android:visibility="visible">
+
+            <ImageButton
+                android:id="@+id/button_drag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:text="Stroke"
+                app:srcCompat="@drawable/drag_icon" />
+
+            <ImageButton
+                android:id="@+id/button_zoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Stroke"
+                android:visibility="gone"
+                app:srcCompat="@drawable/zoom_icon" />
+
+            <ImageButton
+                android:id="@+id/button_rotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:text="Stroke"
+                app:srcCompat="@drawable/rotate_icon" />
             <ImageButton
                 android:id="@+id/button_home"
                 android:layout_width="wrap_content"
@@ -174,8 +213,6 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-
-        <!-- Size Slider for the Brush Tool -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -183,6 +220,18 @@
 
             <com.google.android.material.slider.RangeSlider
                 android:id="@+id/rangebar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/rangebarzoom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
