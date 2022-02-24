@@ -35,7 +35,9 @@ public class DrawView extends View {
     private int backgroundColor;
     private int strokeWidth;
     private Bitmap mBitmap;
+    private Bitmap imageBitmap;
     private Canvas mCanvas;
+    private boolean editing;
     private Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
 
     //Constructor for initialization of attributes
@@ -64,7 +66,7 @@ public class DrawView extends View {
         backgroundColor = background;
         //This condition applies if the user is clicking on already made project
         if(path!=null) {
-            Bitmap imageBitmap = BitmapFactory.decodeFile(path);
+            imageBitmap = BitmapFactory.decodeFile(path);
             height = imageBitmap.getHeight();
             width = imageBitmap.getWidth();
             mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -79,6 +81,7 @@ public class DrawView extends View {
 
             //set the initial size of brush
             strokeWidth = 16;
+            editing = true;
         }
         //This condition applies to newly made projects using FileCreation Page
         else{
@@ -100,6 +103,7 @@ public class DrawView extends View {
 
             //sets default color of canvas
             mCanvas.drawColor(background);
+            editing = false;
         }
     }
 
@@ -148,7 +152,8 @@ public class DrawView extends View {
         //saves current canvas state
         canvas.save();
         //sets default color of canvas
-        mCanvas.drawColor(backgroundColor);
+        if(editing==false) mCanvas.drawColor(backgroundColor);
+        else mCanvas.drawBitmap(imageBitmap, 0f, 0f, null);
 
         //iterates through the list of paths
         for (Stroke fp : paths) {
