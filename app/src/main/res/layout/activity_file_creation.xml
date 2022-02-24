@@ -52,15 +52,16 @@
         android:name="com.example.teamdolphin.ToggleTheme"
         app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <ImageView
         android:id="@+id/image_preview_container"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
-        android:background="@color/white"
+        android:src="@drawable/drawable_solid_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
+        app:layout_constraintTop_toBottomOf="@+id/appbar_container">
+    </ImageView>
 
     <ImageButton
         android:id="@+id/button_import"

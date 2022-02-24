@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
-import java.security.AccessController.getContext
+import androidx.core.content.res.ResourcesCompat
 import kotlin.math.absoluteValue
 
 
 class FileCreation : AppCompatActivity() {
+    private lateinit var layout: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_creation)
@@ -66,13 +65,39 @@ class FileCreation : AppCompatActivity() {
         }
 
         val radioGroup = findViewById<View>(R.id.radioGroup) as RadioGroup
+        val blackImage = ResourcesCompat.getDrawable(resources, R.drawable.drawable_solid_black, null);
+        val whiteImage = ResourcesCompat.getDrawable(resources, R.drawable.drawable_solid_white, null);
         radioGroup.setOnCheckedChangeListener { _, _ ->
-            var layout = findViewById<FragmentContainerView>(R.id.image_preview_container)
+            layout = findViewById<ImageView>(R.id.image_preview_container)
             var darkBackground = findViewById<RadioButton>(R.id.fc_dark_button)
             if (darkBackground.isChecked) {
-                layout.setBackgroundColor(Color.BLACK)
+                layout.setImageDrawable(blackImage)
             } else
-                layout.setBackgroundColor(Color.WHITE)
+                layout .setImageDrawable(whiteImage)
+        }
+
+        //Button to import image
+        //Currenly only shows the image in preview
+        //TODO: still need to find a way to apply that image on canvas
+        var importButton = findViewById<ImageButton>(R.id.button_import)
+        importButton.setOnClickListener {
+            Toast.makeText(this, "Import button clicked", Toast.LENGTH_SHORT).show()
+            pickImageFromGallery()
+        }
+    }
+
+    //Creates an temp intent that let's users pick an image
+    private fun pickImageFromGallery(){
+        var intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
+    //This method gives access to data provided after user selects an image
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode== IMAGE_REQUEST_CODE && resultCode== RESULT_OK){
+            layout.setImageURI(data?.data)
         }
     }
 
@@ -82,6 +107,7 @@ class FileCreation : AppCompatActivity() {
                 ...String must not be empty
                  */
         var projectNameString = ""
+        var IMAGE_REQUEST_CODE = 100
         fun projectNameIsValid(name: String): Boolean{
             return name.isNotEmpty()
         }
