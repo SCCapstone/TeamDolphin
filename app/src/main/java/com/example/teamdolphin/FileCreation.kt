@@ -67,8 +67,9 @@ class FileCreation : AppCompatActivity() {
         val radioGroup = findViewById<View>(R.id.radioGroup) as RadioGroup
         val blackImage = ResourcesCompat.getDrawable(resources, R.drawable.drawable_solid_black, null);
         val whiteImage = ResourcesCompat.getDrawable(resources, R.drawable.drawable_solid_white, null);
+        layout = findViewById(R.id.image_preview_container)
+
         radioGroup.setOnCheckedChangeListener { _, _ ->
-            layout = findViewById<ImageView>(R.id.image_preview_container)
             var darkBackground = findViewById<RadioButton>(R.id.fc_dark_button)
             if (darkBackground.isChecked) {
                 layout.setImageDrawable(blackImage)
