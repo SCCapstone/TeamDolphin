@@ -32,6 +32,7 @@ public class DrawView extends View {
 
     //initializations
     private int currentColor;
+    private int backgroundColor;
     private int strokeWidth;
     private Bitmap mBitmap;
     private Canvas mCanvas;
@@ -60,7 +61,7 @@ public class DrawView extends View {
 
     //instantiation of bitmap and brush settings
     public void init(int height, int width, int background, String path) {
-
+        backgroundColor = background;
         //This condition applies if the user is clicking on already made project
         if(path!=null) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(path);
@@ -114,6 +115,7 @@ public class DrawView extends View {
 
     //uses the array list to check for a previous stroke to undo
     public void undo() {
+        System.out.println("Size path: "+paths.size());
         if (paths.size() != 0) {
             paths.remove(paths.size() - 1);
             invalidate();
@@ -145,6 +147,8 @@ public class DrawView extends View {
     protected void onDraw(Canvas canvas) {
         //saves current canvas state
         canvas.save();
+        //sets default color of canvas
+        mCanvas.drawColor(backgroundColor);
 
         //iterates through the list of paths
         for (Stroke fp : paths) {
