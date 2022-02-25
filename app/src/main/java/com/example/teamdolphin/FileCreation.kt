@@ -118,9 +118,7 @@ class FileCreation : AppCompatActivity() {
             projectWidth.isEnabled = false
             projectWidth.setText("Locked")
             darkToggleButton.isEnabled = false
-            darkToggleButton.isChecked = false
             lightToggleButton.isEnabled = false
-            lightToggleButton.isChecked = false
 
             val button = findViewById<Button>(R.id.button_create)
             button.setOnClickListener {
