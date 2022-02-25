@@ -1,8 +1,14 @@
 package com.example.teamdolphin
 
+import android.R.attr
+import android.content.ContentUris
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +18,7 @@ import kotlin.math.absoluteValue
 
 class FileCreation : AppCompatActivity() {
     private lateinit var layout: ImageView
+    private lateinit var importedImagePath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +85,7 @@ class FileCreation : AppCompatActivity() {
         }
 
         //Button to import image
-        //Currenly only shows the image in preview
+        //Currently only shows the image in preview
         //TODO: still need to find a way to apply that image on canvas
         var importButton = findViewById<ImageButton>(R.id.button_import)
         importButton.setOnClickListener {
@@ -98,9 +105,60 @@ class FileCreation : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode== IMAGE_REQUEST_CODE && resultCode== RESULT_OK){
+            importedImagePath = getPath(data)!!
+            println("Image Bitmap: $importedImagePath")
             layout.setImageURI(data?.data)
         }
     }
+
+    //This article helped in getting this functionality working
+    //https://camposha.info/android-examples/android-capture-pick-image/#gsc.tab=0
+    private fun getImagePath(uri: Uri?, selection: String?): String {
+        var path: String? = null
+        val cursor = contentResolver.query(uri!!, null, selection, null, null )
+        if (cursor != null){
+            if (cursor.moveToFirst()) {
+                path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
+            }
+            cursor.close()
+        }
+        return path!!
+    }
+
+    private fun getPath(data: Intent?): String? {
+        var imagePath: String? = null
+        val uri = data!!.data
+        //DocumentsContract defines the contract between a documents provider and the platform.
+        if (DocumentsContract.isDocumentUri(this, uri)){
+            val docId = DocumentsContract.getDocumentId(uri)
+            if (uri != null) {
+                if ("com.android.providers.media.documents" == uri.authority){
+                    val id = docId.split(":")[1]
+                    val selection = MediaStore.Images.Media._ID + "=" + id
+                    imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        selection)
+                } else if (uri != null) {
+                    if ("com.android.providers.downloads.documents" == uri.authority){
+                        val contentUri = ContentUris.withAppendedId(Uri.parse(
+                            "content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
+                        imagePath = getImagePath(contentUri, null)
+                    }
+                }
+            }
+        }
+        else if (uri != null) {
+            if ("content".equals(uri.scheme, ignoreCase = true)){
+                imagePath = getImagePath(uri, null)
+            }
+            else if (uri != null) {
+                if ("file".equals(uri.scheme, ignoreCase = true)){
+                    imagePath = uri.path
+                }
+            }
+        }
+        return imagePath
+    }
+
 
     companion object {
         /*
