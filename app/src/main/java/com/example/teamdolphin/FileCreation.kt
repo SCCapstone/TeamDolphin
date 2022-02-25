@@ -1,9 +1,7 @@
 package com.example.teamdolphin
 
-import android.R.attr
 import android.content.ContentUris
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -44,7 +42,7 @@ class FileCreation : AppCompatActivity() {
             else
                 Color.WHITE
 
-            var appropriateSize: Boolean = true
+            var appropriateSize = true
 
             if(projectNameIsValid(projectName.text.toString())){
                 val intent = Intent(this, TesterCanvas()::class.java)
@@ -108,6 +106,32 @@ class FileCreation : AppCompatActivity() {
             importedImagePath = getPath(data)!!
             println("Image Bitmap: $importedImagePath")
             layout.setImageURI(data?.data)
+
+            var projectWidth = findViewById<EditText>(R.id.field_width)
+            var projectHeight = findViewById<EditText>(R.id.field_height)
+            var darkToggleButton = findViewById<RadioButton>(R.id.fc_dark_button)
+            var lightToggleButton = findViewById<RadioButton>(R.id.fc_light_button)
+
+            //Disabling things that won't be needed if user imports an image
+            projectHeight.isEnabled = false
+            projectHeight.setText("Locked")
+            projectWidth.isEnabled = false
+            projectWidth.setText("Locked")
+            darkToggleButton.isEnabled = false
+            darkToggleButton.isChecked = false
+            lightToggleButton.isEnabled = false
+            lightToggleButton.isChecked = false
+
+            val button = findViewById<Button>(R.id.button_create)
+            button.setOnClickListener {
+                var projectName = findViewById<EditText>(R.id.field_projectName)
+                if(projectNameIsValid(projectName.text.toString())) {
+                    val intent = Intent(this, TesterCanvas()::class.java)
+                    intent.putExtra("imagePath", importedImagePath)
+                    startActivity(intent)
+                }
+                Toast.makeText(this, "Enter a valid project name", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
