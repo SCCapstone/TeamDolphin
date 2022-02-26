@@ -46,11 +46,11 @@ public class TesterCanvas extends AppCompatActivity{
     private ImageButton drag, zoom, rotate;
 
     //inited rangeslider object for brush stroke
-    private RangeSlider rangeSlider, rangeSliderZoom;
+    private RangeSlider rangeSlider, rangeSliderZoom, rangeSliderRotate;
 
     //stores the color to a local integer
     private int localColor;
-
+    private boolean dragClickedBefore = false;
 
 
     @Override
@@ -62,6 +62,7 @@ public class TesterCanvas extends AppCompatActivity{
         paint = (DrawView) findViewById(R.id.draw_view);
         rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
         rangeSliderZoom = (RangeSlider) findViewById(R.id.rangebarzoom);
+        rangeSliderRotate = (RangeSlider) findViewById(R.id.rangebarrotate);
         undo = (ImageButton) findViewById(R.id.button_undo);
         save = (ImageButton) findViewById(R.id.button_save);
         brush = (ImageButton) findViewById(R.id.button_brush);
@@ -178,6 +179,7 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onClick(View view)
             {
+                paint.setEnabled(false);
                 if(rangeSlider.getVisibility() == view.VISIBLE)
                     rangeSlider.setVisibility(View.GONE);
                 else
@@ -204,8 +206,20 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
             {
-                paint.setZoom((int) value);
+                System.out.println("Value changed to " + value); //okay, the value is changing
+                paint.setScaleX(value*3);
+                paint.setScaleY(value*3);
             }
+        });
+
+        rangeSliderRotate.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
+            {
+
+                paint.setRotation(value*360);
+            }
+
         });
 
         zoom.setOnClickListener(new View.OnClickListener()
@@ -217,6 +231,19 @@ public class TesterCanvas extends AppCompatActivity{
                     rangeSliderZoom.setVisibility(View.GONE);
                 else
                     rangeSliderZoom.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        rotate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(rangeSliderRotate.getVisibility() == view.VISIBLE)
+                    rangeSliderRotate.setVisibility(View.GONE);
+                else
+                    rangeSliderRotate.setVisibility(View.VISIBLE);
 
             }
         });
@@ -267,7 +294,44 @@ public class TesterCanvas extends AppCompatActivity{
         {
             public void onClick(View view)
             {
-                paint.drag();
+                if(dragClickedBefore == false) {
+                    paint.setEnabled(true);
+                    paint.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            float xDown = 0;
+                            float yDown = 0;
+                            switch (event.getActionMasked()) {
+                                case MotionEvent.ACTION_DOWN:
+                                    xDown = event.getX();
+                                    yDown = event.getY();
+                                    break;
+                                case MotionEvent.ACTION_MOVE:
+                                    float movedX, movedY;
+                                    movedX = event.getX();
+                                    movedY = event.getY();
+
+                                    float distanceX = movedX - xDown;
+                                    float distanceY = movedY - yDown;
+
+                                    paint.setX(paint.getX() + distanceX);
+                                    paint.setY(paint.getY() + distanceY);
+
+                                    xDown = movedX;
+                                    yDown = movedY;
+                                    dragClickedBefore = true;
+                                    break;
+                            }
+
+                            return true;
+                        }
+                    });
+                } else {
+                    paint.setEnabled(false);
+                    dragClickedBefore = false;
+                }
+                //paint.drag();
+                //paint.setCameraDistance();
             }
         });
 

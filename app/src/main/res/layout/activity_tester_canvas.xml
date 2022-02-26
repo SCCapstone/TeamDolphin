@@ -237,6 +237,18 @@
                 android:visibility="gone" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/rangebarrotate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

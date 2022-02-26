@@ -131,9 +131,11 @@ public class DrawView extends View {
         return mBitmap;
     }
 
+
+
     public void drag() {
-        //mCanvas.translate(100,100);
-        //does not work currently
+        mCanvas.translate(100,100);
+
     }
 
     public void setZoom(int zoom) {
