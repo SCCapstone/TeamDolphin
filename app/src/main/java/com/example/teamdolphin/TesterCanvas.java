@@ -222,6 +222,7 @@ public class TesterCanvas extends AppCompatActivity{
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
             {
                 paint.setStrokeWidth((int) value);
+                //this was used during testing
                 //brushSize = value;
             }
         });
