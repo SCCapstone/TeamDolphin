@@ -4,26 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.3824074074074074" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/drag_icon.xml" value="0.105" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/eraser_icon.xml" value="0.105" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/ic_baseline_pan_tool_24.xml" value="0.105" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/pen_icon.xml" value="0.1" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/rotate_icon.xml" value="0.105" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/save_icon.xml" value="0.105" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/select_icon.xml" value="0.105" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/shapes_icon.xml" value="0.105" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/drawable/undo_icon.xml" value="0.105" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_canvas.xml" value="0.176" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_canvas_drawer.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_file_creation.xml" value="0.24975704567541301" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/activity_tester_canvas.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/app_bar_canvas_drawer.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/content_canvas_drawer.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_home.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toggle_theme.xml" value="0.24954710144927536" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toolbar.xml" value="0.264" />
-        <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/gridview_item.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/Tyreek/AndroidStudioProjects/TeamDolphin/app/src/main/res/layout/nav_header_canvas_drawer.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/prath/Documents/TeamDolphin/app/src/main/res/layout/activity_file_creation.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/psingh/StudioProjects/TeamDolphin/app/src/main/res/layout/activity_file_creation.xml" value="0.264" />
@@ -33,6 +22,7 @@
         <entry key="..\:/Users/psingh/StudioProjects/TeamDolphin/app/src/main/res/layout/fragment_toolbar.xml" value="0.309375" />
         <entry key="..\:/Users/psingh/StudioProjects/TeamDolphin/app/src/main/res/layout/grid_item.xml" value="0.3046153846153846" />
         <entry key="..\:/Users/psingh/StudioProjects/TeamDolphin/app/src/main/res/layout/gridview_item.xml" value="0.27314814814814814" />
+        <entry key="app/src/main/res/drawable/color_picker_icon.xml" value="0.14" />
         <entry key="app/src/main/res/drawable/color_preview_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/dolphinartlogo.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/menu_icon.xml" value="0.23541666666666666" />
