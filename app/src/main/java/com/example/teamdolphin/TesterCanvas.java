@@ -114,6 +114,13 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onClick(View view)
             {
+                Context context = getApplicationContext();
+                CharSequence text = "Undo";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
                 paint.undo();
             }
         });
@@ -185,6 +192,17 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onClick(View view)
             {
+                Context context = getApplicationContext();
+                CharSequence text = "Brush";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                //Ensure all other range sliders are disabled
+                rangeSliderRotate.setVisibility(View.GONE);
+                rangeSliderZoom.setVisibility(View.GONE);
+
                 if(eraserClicked == true)
                     paint.setColor(brushColor);
                 paint.setEnabled(false);
@@ -200,6 +218,16 @@ public class TesterCanvas extends AppCompatActivity{
         {
             @Override
             public void onClick(View view) {
+                Context context = getApplicationContext();
+                CharSequence text = "Eraser";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                //Ensure all other sliders disable
+                rangeSliderRotate.setVisibility(View.GONE);
+                rangeSliderZoom.setVisibility(View.GONE);
+
                 paint.setColor(eraserColor);
                 paint.setEnabled(false);
                 eraserClicked = true;
@@ -253,6 +281,16 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onClick(View view)
             {
+                Context context = getApplicationContext();
+                CharSequence text = "Zoom";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                //Set all other range sliders to invisible
+                rangeSliderRotate.setVisibility(View.GONE);
+                rangeSlider.setVisibility(View.GONE);
+
                 if(rangeSliderZoom.getVisibility() == view.VISIBLE)
                     rangeSliderZoom.setVisibility(View.GONE);
                 else
@@ -266,6 +304,16 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onClick(View view)
             {
+                Context context = getApplicationContext();
+                CharSequence text = "Rotate";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                //Set all other range sliders to invisible
+                rangeSlider.setVisibility(View.GONE);
+                rangeSliderZoom.setVisibility(View.GONE);
+
                 if(rangeSliderRotate.getVisibility() == view.VISIBLE)
                     rangeSliderRotate.setVisibility(View.GONE);
                 else
@@ -321,6 +369,12 @@ public class TesterCanvas extends AppCompatActivity{
         {
             public void onClick(View view)
             {
+                Context context = getApplicationContext();
+                CharSequence text = "Drag";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
                 if(dragClickedBefore == false) {
                     paint.setEnabled(true);
                     paint.setOnTouchListener(new View.OnTouchListener() {
@@ -367,18 +421,26 @@ public class TesterCanvas extends AppCompatActivity{
         {
             public void onClick(View view)
             {
+
+                rangeSlider.setVisibility(View.GONE);
+                rangeSliderRotate.setVisibility(View.GONE);
+                rangeSliderZoom.setVisibility(View.GONE);
+
                 if(eraser.getVisibility() == view.VISIBLE) {
 
                     eraser.setVisibility(View.GONE);
-                    colorPicker.setVisibility(View.GONE);
-                    pen.setVisibility(View.GONE);
+                    save.setVisibility(View.GONE);
+                    shapeTool.setVisibility(View.GONE);
                     eyeDropper.setVisibility(View.GONE);
 
-                    selection.setVisibility(View.GONE);
-                    paintBucket.setVisibility(View.GONE);
-                    colorPreview.setVisibility(View.GONE);
-                    shapeTool.setVisibility(View.GONE);
+                    //Not Visible until implemented
+                    //selection.setVisibility(View.GONE);
+                    //paintBucket.setVisibility(View.GONE);
+                    //colorPreview.setVisibility(View.GONE);
+                    //pen.setVisibility(View.GONE);
+
                     home.setVisibility(View.GONE);
+
                     drag.setVisibility(View.GONE);
                     zoom.setVisibility(View.GONE);
                     rotate.setVisibility(View.GONE);
@@ -386,20 +448,50 @@ public class TesterCanvas extends AppCompatActivity{
                 else {
 
                     eraser.setVisibility(View.VISIBLE);
-                    colorPicker.setVisibility(View.VISIBLE);
-                    pen.setVisibility(View.VISIBLE);
+                    save.setVisibility(View.VISIBLE);
+                    shapeTool.setVisibility(View.VISIBLE);
                     eyeDropper.setVisibility(View.VISIBLE);
 
-                    selection.setVisibility(View.VISIBLE);
-                    paintBucket.setVisibility(View.VISIBLE);
-                    colorPreview.setVisibility(View.VISIBLE);
-                    shapeTool.setVisibility(View.VISIBLE);
+                    //Not Visible until implemented
+                    //selection.setVisibility(View.VISIBLE);
+                    //paintBucket.setVisibility(View.VISIBLE);
+                    //colorPreview.setVisibility(View.VISIBLE);
+                    //pen.setVisibility(View.VISIBLE);
+
                     home.setVisibility(View.VISIBLE);
 
                     drag.setVisibility(View.VISIBLE);
                     zoom.setVisibility(View.VISIBLE);
                     rotate.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        //OnClick Listener for Shape Tool
+        shapeTool.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                Context context = getApplicationContext();
+                CharSequence text = "Pen Tool Not Implemented";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
+
+        //OnClick Listener for Eye Dropper Tool
+        eyeDropper.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                Context context = getApplicationContext();
+                CharSequence text = "EyeDropper Tool Not Implemented";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         });
 

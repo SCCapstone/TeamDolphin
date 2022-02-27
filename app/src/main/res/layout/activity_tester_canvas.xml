@@ -51,12 +51,12 @@
                 android:text="Undo" />
 
             <ImageButton
-                android:id="@+id/button_save"
+                android:id="@+id/button_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/save_icon"
-                android:text="Save" />
+                android:src="@drawable/color_picker_icon"
+                android:text="Color Picker" />
 
             <ImageButton
                 android:id="@+id/button_brush"
@@ -93,20 +93,11 @@
                 android:visibility="gone"/>
 
             <ImageButton
-                android:id="@+id/button_color"
+                android:id="@+id/button_shape"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/color_picker_icon"
-                android:text="Color Picker"
-                android:visibility="gone"/>
-
-            <ImageButton
-                android:id="@+id/button_pen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/pen_icon"
+                android:src="@drawable/shapes_icon"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
@@ -117,6 +108,15 @@
                 android:layout_weight="1"
                 android:src="@drawable/eyedropper_icon"
                 android:text="Stroke"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/save_icon"
+                android:text="Save"
                 android:visibility="gone"/>
         </LinearLayout>
 
@@ -147,11 +147,11 @@
                 android:visibility="gone"/>
 
             <ImageButton
-                android:id="@+id/button_shape"
+                android:id="@+id/button_pen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/shapes_icon"
+                android:src="@drawable/pen_icon"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
