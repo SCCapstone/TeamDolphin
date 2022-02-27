@@ -46,10 +46,11 @@ public class TesterCanvas extends AppCompatActivity{
     private ImageButton drag, zoom, rotate;
 
     //inited rangeslider object for brush stroke
-    private RangeSlider rangeSlider, rangeSliderZoom, rangeSliderRotate, rangeEraser;
+    private RangeSlider rangeSlider, rangeSliderZoom, rangeSliderRotate;
 
     //stores the color to a local integer
     private int localColor, brushColor, eraserColor;
+    private boolean eraserClicked = false;
     private boolean dragClickedBefore = false;
 
 
@@ -70,7 +71,6 @@ public class TesterCanvas extends AppCompatActivity{
 
         //second row tools for canvas UI
         eraser = (ImageButton) findViewById(R.id.button_eraser);
-        rangeEraser = (RangeSlider) findViewById(R.id.rangebareraser);
         colorPicker = (ImageButton) findViewById(R.id.button_color);
         pen = (ImageButton) findViewById(R.id.button_pen);
         eyeDropper = (ImageButton) findViewById(R.id.button_eyedropper);
@@ -94,6 +94,7 @@ public class TesterCanvas extends AppCompatActivity{
         brushColor = 0;
         //holds eraser value for canvas
         eraserColor = 0;
+
 
         //The onclick listeners for each button
 
@@ -184,6 +185,8 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onClick(View view)
             {
+                if(eraserClicked == true)
+                    paint.setColor(brushColor);
                 paint.setEnabled(false);
                 if(rangeSlider.getVisibility() == view.VISIBLE)
                     rangeSlider.setVisibility(View.GONE);
@@ -197,10 +200,13 @@ public class TesterCanvas extends AppCompatActivity{
         {
             @Override
             public void onClick(View view) {
-                if(rangeEraser.getVisibility() == view.VISIBLE)
-                    rangeEraser.setVisibility(View.GONE);
+                paint.setColor(eraserColor);
+                paint.setEnabled(false);
+                eraserClicked = true;
+                if(rangeSlider.getVisibility() == view.VISIBLE)
+                    rangeSlider.setVisibility(View.GONE);
                 else
-                    rangeEraser.setVisibility(View.VISIBLE);
+                    rangeSlider.setVisibility(View.VISIBLE);
 
             }
         });
@@ -216,8 +222,10 @@ public class TesterCanvas extends AppCompatActivity{
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
             {
                 paint.setStrokeWidth((int) value);
+                brushSize = value;
             }
         });
+
 
         rangeSliderZoom.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
@@ -416,6 +424,7 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
                     public void onOk(AmbilWarnaDialog dialog, int color){
                 localColor = color;
+                brushColor = color;
                 paint.setColor(color);
                 colorPicker.setColorFilter(color);
             }
