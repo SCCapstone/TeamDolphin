@@ -36,182 +36,171 @@
             app:layout_constraintVertical_bias="0.181" />
 
 
-        <LinearLayout
+        <GridLayout
+            android:id="@+id/tools_grid_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:columnCount="4"
+            android:alignmentMode="alignBounds"
             android:background="#AAAAAA">
 
             <ImageButton
                 android:id="@+id/button_undo"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/undo_icon"
                 android:text="Undo" />
 
             <ImageButton
                 android:id="@+id/button_color"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/color_picker_icon"
                 android:text="Color Picker" />
 
             <ImageButton
                 android:id="@+id/button_brush"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/brush_24"
                 android:text="Stroke" />
 
             <ImageButton
                 android:id="@+id/button_menu"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/menu_icon"
                 android:text="Stroke" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/CanvasUIRow2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#AAAAAA"
-            android:visibility="visible" >
 
             <ImageButton
                 android:id="@+id/button_eraser"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/eraser_icon"
                 android:text="Undo"
                 android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/button_shape"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/shapes_icon"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/button_eyedropper"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/eyedropper_icon"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/button_save"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/save_icon"
                 android:text="Save"
                 android:visibility="gone"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/CanvasUIRow3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#AAAAAA"
-            android:visibility="visible" >
 
             <ImageButton
                 android:id="@+id/button_selection"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/select_icon"
                 android:text="Undo"
                 android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/button_paintbucket"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/paintbucket_icon"
                 android:text="Save"
                 android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/button_pen"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/pen_icon"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
             <ImageButton
                 android:id="@+id/button_colorpreview"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/color_preview_icon"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
 
-        </LinearLayout>
-
-
-        <!-- Size Slider for the Brush Tool -->
-        <LinearLayout
-            android:id="@+id/CanvasUIRow4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#AAAAAA"
-            android:visibility="visible">
-
             <ImageButton
                 android:id="@+id/button_drag"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:visibility="gone"
                 android:text="Stroke"
                 app:srcCompat="@drawable/drag_icon" />
 
             <ImageButton
                 android:id="@+id/button_zoom"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:text="Stroke"
                 android:visibility="gone"
                 app:srcCompat="@drawable/zoom_icon" />
 
             <ImageButton
                 android:id="@+id/button_rotate"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:visibility="gone"
                 android:text="Stroke"
                 app:srcCompat="@drawable/rotate_icon" />
             <ImageButton
                 android:id="@+id/button_home"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_columnWeight="1"
                 android:src="@drawable/home_icon"
                 android:text="Stroke"
                 android:visibility="gone"/>
-        </LinearLayout>
+        </GridLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

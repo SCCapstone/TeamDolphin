@@ -3,10 +3,12 @@ package com.example.teamdolphin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import android.content.ContentValues;
@@ -17,7 +19,9 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -27,19 +31,21 @@ import com.google.android.material.slider.RangeSlider;
 
 import java.io.File;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import kotlinx.coroutines.internal.ExceptionsConstuctorKt;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 
+public class TesterCanvas extends AppCompatActivity {
 
-public class TesterCanvas extends AppCompatActivity{
-
-    //inited the DrawView object
+    //initiated the DrawView object
     private DrawView paint;
 
     //current functionality of canvas with SEMESTER 1 Build
-    private ImageButton undo,save,brush,home, dropdown;
+    private ImageButton undo, save, brush, home, dropdown;
 
     private ImageButton eraser, colorPicker, pen, eyeDropper;
     private ImageButton selection, paintBucket, colorPreview, shapeTool;
@@ -53,6 +59,32 @@ public class TesterCanvas extends AppCompatActivity{
     private boolean eraserClicked = false;
     private boolean dragClickedBefore = false;
 
+    //Variables to save initial brush button position
+    private ImageButton currentlyPrimaryButton;
+    private ArrayList<ImageButton> buttonList;
+    private GridLayout toolGridLayout;
+    private int buttonPrimaryColor;
+
+    //Swaps two buttons positions
+    public void swapButtons(ImageButton currentlySelected, ImageButton wantSelected) {
+        if(currentlySelected==wantSelected)
+            return;
+        //updateArraylist
+        int indexOfCurrentSelected = 2;
+        int indexOfWantSelected = 0;
+        for (int i = 0; i < buttonList.size(); i++) {
+            if (buttonList.get(i).getId() == wantSelected.getId()) {
+                indexOfWantSelected = i;
+            }
+        }
+        //System.out.println("Current: " + indexOfCurrentSelected + " Want: " + indexOfWantSelected);
+        swap(toolGridLayout, currentlySelected.getId(), wantSelected.getId());
+        //System.out.println("ID: " + brush.getId());
+        Collections.swap(buttonList, indexOfCurrentSelected, indexOfWantSelected);
+        currentlyPrimaryButton = wantSelected;
+        wantSelected.setColorFilter(Color.BLUE);
+        currentlySelected.setColorFilter(Color.DKGRAY);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +120,31 @@ public class TesterCanvas extends AppCompatActivity{
 
         dropdown = (ImageButton) findViewById(R.id.button_menu);
 
+        buttonList = new ArrayList<ImageButton>();
+        //Adding all buttons to the list
+        buttonList.add(undo);
+        buttonList.add(colorPicker);
+        buttonList.add(brush);
+        buttonList.add(dropdown);
+        buttonList.add(eraser);
+        buttonList.add(shapeTool);
+        buttonList.add(eyeDropper);
+        buttonList.add(save);
+        buttonList.add(drag);
+        buttonList.add(zoom);
+        buttonList.add(rotate);
+        buttonList.add(home);
+
+        toolGridLayout = findViewById(R.id.tools_grid_layout);
+
+        //Initializing primary button
+        currentlyPrimaryButton = brush;
+
+        for(int i = 0; i < buttonList.size(); i++) {
+            buttonList.get(i).setColorFilter(Color.DKGRAY);
+        }
+        brush.setColorFilter(Color.BLUE);
+
         //set default color to black
         localColor = 0;
         //holds current color of brush
@@ -100,20 +157,18 @@ public class TesterCanvas extends AppCompatActivity{
 
         //If picture already exists, import it
         String projectName = FileCreation.Companion.getProjectNameString() + ".png";
-        String duplicateFile =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/DolphinArt Projects/" + projectName;
+        String duplicateFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/DolphinArt Projects/" + projectName;
         File myFile = new File(duplicateFile);
-        if(myFile.exists()) {
+        if (myFile.exists()) {
             System.out.println("The File Exists");
             //paint.importImage(duplicateFile);
         }
 
 
         //using the drawview function, remove most recent stroke
-        undo.setOnClickListener(new View.OnClickListener()
-        {
+        undo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Context context = getApplicationContext();
                 CharSequence text = "Undo";
                 int duration = Toast.LENGTH_SHORT;
@@ -127,11 +182,9 @@ public class TesterCanvas extends AppCompatActivity{
 
         /* is able to save the current bitmap
         as a png in the filesystem storage*/
-        save.setOnClickListener(new View.OnClickListener()
-        {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 //getting current bitmap from DrawView
                 Bitmap bitmap = paint.save();
 
@@ -152,8 +205,8 @@ public class TesterCanvas extends AppCompatActivity{
                         Environment.DIRECTORY_PICTURES
                 );
                 //Makes the DolphinArt Projects folder
-                File mediaStorageDir =  new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"DolphinArt Projects");
-                if(!mediaStorageDir.exists())
+                File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "DolphinArt Projects");
+                if (!mediaStorageDir.exists())
                     mediaStorageDir.mkdirs();
 
 
@@ -172,10 +225,10 @@ public class TesterCanvas extends AppCompatActivity{
                     //Creating the Toast and values
                     Context context = getApplicationContext();
                     CharSequence savedText = "\"" + projectName + "\" Saved to Pictures\\DolphinArt Projects";
-                    int duration= Toast.LENGTH_SHORT;
+                    int duration = Toast.LENGTH_SHORT;
 
                     //The actual toast message
-                    Toast toast = Toast.makeText(context,savedText,duration);
+                    Toast toast = Toast.makeText(context, savedText, duration);
                     toast.show();
 
                     // close the output stream after use
@@ -187,11 +240,9 @@ public class TesterCanvas extends AppCompatActivity{
         });
 
         //toggle button for brushSizeSlider
-        brush.setOnClickListener(new View.OnClickListener()
-        {
+        brush.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Context context = getApplicationContext();
                 CharSequence text = "Brush";
                 int duration = Toast.LENGTH_SHORT;
@@ -203,19 +254,18 @@ public class TesterCanvas extends AppCompatActivity{
                 rangeSliderRotate.setVisibility(View.GONE);
                 rangeSliderZoom.setVisibility(View.GONE);
 
-                if(eraserClicked == true)
+                if (eraserClicked == true)
                     paint.setColor(brushColor);
                 paint.setEnabled(false);
-                if(rangeSlider.getVisibility() == view.VISIBLE)
+                if (rangeSlider.getVisibility() == view.VISIBLE)
                     rangeSlider.setVisibility(View.GONE);
                 else
                     rangeSlider.setVisibility(View.VISIBLE);
-
+                swapButtons(currentlyPrimaryButton, brush);
             }
         });
 
-        eraser.setOnClickListener(new View.OnClickListener()
-        {
+        eraser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = getApplicationContext();
@@ -231,11 +281,12 @@ public class TesterCanvas extends AppCompatActivity{
                 paint.setColor(eraserColor);
                 paint.setEnabled(false);
                 eraserClicked = true;
-                if(rangeSlider.getVisibility() == view.VISIBLE)
+                if (rangeSlider.getVisibility() == view.VISIBLE)
                     rangeSlider.setVisibility(View.GONE);
                 else
                     rangeSlider.setVisibility(View.VISIBLE);
 
+                swapButtons(currentlyPrimaryButton, eraser);
             }
         });
 
@@ -244,11 +295,9 @@ public class TesterCanvas extends AppCompatActivity{
         rangeSlider.setValueTo(100.0f);
 
         //listener for when the user sets a new brush size
-        rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener()
-        {
+        rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
-            {
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
                 paint.setStrokeWidth((int) value);
                 //this was used during testing
                 //brushSize = value;
@@ -258,29 +307,25 @@ public class TesterCanvas extends AppCompatActivity{
 
         rangeSliderZoom.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
-            {
-                System.out.println("Value changed to " + value); //okay, the value is changing
-                paint.setScaleX(value*3);
-                paint.setScaleY(value*3);
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                //System.out.println("Value changed to " + value); //okay, the value is changing
+                paint.setScaleX(value * 3);
+                paint.setScaleY(value * 3);
             }
         });
 
         rangeSliderRotate.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser)
-            {
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 
-                paint.setRotation(value*360);
+                paint.setRotation(value * 360);
             }
 
         });
 
-        zoom.setOnClickListener(new View.OnClickListener()
-        {
+        zoom.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Context context = getApplicationContext();
                 CharSequence text = "Zoom";
                 int duration = Toast.LENGTH_SHORT;
@@ -291,19 +336,17 @@ public class TesterCanvas extends AppCompatActivity{
                 rangeSliderRotate.setVisibility(View.GONE);
                 rangeSlider.setVisibility(View.GONE);
 
-                if(rangeSliderZoom.getVisibility() == view.VISIBLE)
+                if (rangeSliderZoom.getVisibility() == view.VISIBLE)
                     rangeSliderZoom.setVisibility(View.GONE);
                 else
                     rangeSliderZoom.setVisibility(View.VISIBLE);
-
+                swapButtons(currentlyPrimaryButton, zoom);
             }
         });
 
-        rotate.setOnClickListener(new View.OnClickListener()
-        {
+        rotate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Context context = getApplicationContext();
                 CharSequence text = "Rotate";
                 int duration = Toast.LENGTH_SHORT;
@@ -314,20 +357,18 @@ public class TesterCanvas extends AppCompatActivity{
                 rangeSlider.setVisibility(View.GONE);
                 rangeSliderZoom.setVisibility(View.GONE);
 
-                if(rangeSliderRotate.getVisibility() == view.VISIBLE)
+                if (rangeSliderRotate.getVisibility() == view.VISIBLE)
                     rangeSliderRotate.setVisibility(View.GONE);
                 else
                     rangeSliderRotate.setVisibility(View.VISIBLE);
-
+                swapButtons(currentlyPrimaryButton, zoom);
             }
         });
 
 
         //returns the user to the homepage
-        home.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
+        home.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
                 Intent intent = new Intent(TesterCanvas.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -344,19 +385,19 @@ public class TesterCanvas extends AppCompatActivity{
                 int width, height, background;
                 String path;
 
-                try{
+                try {
                     width = intent.getIntExtra("width", paint.getMeasuredWidth());
                     height = intent.getIntExtra("height", paint.getMeasuredHeight());
                     background = intent.getIntExtra("background", Color.WHITE);
-                }catch (Resources.NotFoundException e){
+                } catch (Resources.NotFoundException e) {
                     width = 0;
                     height = 0;
                     background = -1;
                 }
 
-                try{
+                try {
                     path = intent.getStringExtra("imagePath");
-                }catch (Resources.NotFoundException e){
+                } catch (Resources.NotFoundException e) {
                     path = null;
                 }
                 paint.init(height, width, background, path);
@@ -365,47 +406,43 @@ public class TesterCanvas extends AppCompatActivity{
         });
 
         //Make drag button drag the canvas
-        drag.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
+        drag.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            public void onClick(View view) {
                 Context context = getApplicationContext();
                 CharSequence text = "Drag";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-                if(dragClickedBefore == false) {
+                if (dragClickedBefore == false) {
                     paint.setEnabled(true);
-                    paint.setOnTouchListener(new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            float xDown = 0;
-                            float yDown = 0;
-                            switch (event.getActionMasked()) {
-                                case MotionEvent.ACTION_DOWN:
-                                    xDown = event.getX();
-                                    yDown = event.getY();
-                                    break;
-                                case MotionEvent.ACTION_MOVE:
-                                    float movedX, movedY;
-                                    movedX = event.getX();
-                                    movedY = event.getY();
+                    paint.setOnTouchListener((v, event) -> {
+                        float xDown = 0;
+                        float yDown = 0;
+                        switch (event.getActionMasked()) {
+                            case MotionEvent.ACTION_DOWN:
+                                xDown = event.getX();
+                                yDown = event.getY();
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+                                float movedX, movedY;
+                                movedX = event.getX();
+                                movedY = event.getY();
 
-                                    float distanceX = movedX - xDown;
-                                    float distanceY = movedY - yDown;
+                                float distanceX = movedX - xDown;
+                                float distanceY = movedY - yDown;
 
-                                    paint.setX(paint.getX() + distanceX);
-                                    paint.setY(paint.getY() + distanceY);
+                                paint.setX(paint.getX() + distanceX);
+                                paint.setY(paint.getY() + distanceY);
 
-                                    xDown = movedX;
-                                    yDown = movedY;
-                                    dragClickedBefore = true;
-                                    break;
-                            }
-
-                            return true;
+                                xDown = movedX;
+                                yDown = movedY;
+                                dragClickedBefore = true;
+                                break;
                         }
+
+                        return true;
                     });
                 } else {
                     paint.setEnabled(false);
@@ -413,93 +450,63 @@ public class TesterCanvas extends AppCompatActivity{
                 }
                 //paint.drag();
                 //paint.setCameraDistance();
+                swapButtons(currentlyPrimaryButton, drag);
             }
         });
 
+
         //Make Full Menu Visible and Hidden
-        dropdown.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
+        dropdown.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
 
                 rangeSlider.setVisibility(View.GONE);
                 rangeSliderRotate.setVisibility(View.GONE);
                 rangeSliderZoom.setVisibility(View.GONE);
 
-                if(eraser.getVisibility() == view.VISIBLE) {
-
-                    eraser.setVisibility(View.GONE);
-                    save.setVisibility(View.GONE);
-                    shapeTool.setVisibility(View.GONE);
-                    eyeDropper.setVisibility(View.GONE);
-
-                    //Not Visible until implemented
-                    //selection.setVisibility(View.GONE);
-                    //paintBucket.setVisibility(View.GONE);
-                    //colorPreview.setVisibility(View.GONE);
-                    //pen.setVisibility(View.GONE);
-
-                    home.setVisibility(View.GONE);
-
-                    drag.setVisibility(View.GONE);
-                    zoom.setVisibility(View.GONE);
-                    rotate.setVisibility(View.GONE);
-                }
-                else {
-
-                    eraser.setVisibility(View.VISIBLE);
-                    save.setVisibility(View.VISIBLE);
-                    shapeTool.setVisibility(View.VISIBLE);
-                    eyeDropper.setVisibility(View.VISIBLE);
-
-                    //Not Visible until implemented
-                    //selection.setVisibility(View.VISIBLE);
-                    //paintBucket.setVisibility(View.VISIBLE);
-                    //colorPreview.setVisibility(View.VISIBLE);
-                    //pen.setVisibility(View.VISIBLE);
-
-                    home.setVisibility(View.VISIBLE);
-
-                    drag.setVisibility(View.VISIBLE);
-                    zoom.setVisibility(View.VISIBLE);
-                    rotate.setVisibility(View.VISIBLE);
+                if (home.getVisibility() == view.VISIBLE) {
+                    for(int i = 4; i < buttonList.size(); i++) {
+                        buttonList.get(i).setVisibility(View.GONE);
+                    }
+                } else {
+                    for(int i = 0; i < buttonList.size(); i++) {
+                        buttonList.get(i).setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
 
         //OnClick Listener for Shape Tool
-        shapeTool.setOnClickListener(new View.OnClickListener()
-        {
+        shapeTool.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Context context = getApplicationContext();
                 CharSequence text = "Pen Tool Not Implemented";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                swapButtons(currentlyPrimaryButton, shapeTool);
             }
         });
 
         //OnClick Listener for Eye Dropper Tool
-        eyeDropper.setOnClickListener(new View.OnClickListener()
-        {
+        eyeDropper.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Context context = getApplicationContext();
                 CharSequence text = "EyeDropper Tool Not Implemented";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                swapButtons(currentlyPrimaryButton, eyeDropper);
             }
         });
 
         //when colorPicker is pressed open dialog for color
-        colorPicker.setOnClickListener(new View.OnClickListener()
-        {
+        colorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 //uses openColorDialogue to open Library Dialogue
                 openColorDialogue();
             }
@@ -507,21 +514,59 @@ public class TesterCanvas extends AppCompatActivity{
     }
 
     //method used to open the dialog provided by open source library
-    public void openColorDialogue(){
+    public void openColorDialogue() {
         final AmbilWarnaDialog colorPickerDialogue = new AmbilWarnaDialog(this, localColor,
-                new AmbilWarnaDialog.OnAmbilWarnaListener(){
-            @Override
-                    public void onCancel(AmbilWarnaDialog dialog){
+                new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                    @Override
+                    public void onCancel(AmbilWarnaDialog dialog) {
 
-            }
-            @Override
-                    public void onOk(AmbilWarnaDialog dialog, int color){
-                localColor = color;
-                brushColor = color;
-                paint.setColor(color);
-                colorPicker.setColorFilter(color);
-            }
+                    }
+
+                    @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color) {
+                        localColor = color;
+                        brushColor = color;
+                        paint.setColor(color);
+                        colorPicker.setColorFilter(color);
+                    }
                 });
         colorPickerDialogue.show();
     }
+
+    //https://stackoverflow.com/questions/71431781/how-to-swap-elements-in-a-grid-layout-android
+    private void swap(ViewGroup parent, int resourceId1, int resourceId2)
+    {
+        final int children = parent.getChildCount();
+        if(children == 0) return;
+
+        View view1 = null, view2 = null;
+        int id, count = 0, index1 = 0, index2 = 0;
+        for(int i=0; i<children && count < 3; ++i) {
+            final View view = parent.getChildAt(i);
+            id = view.getId();
+            if(id == resourceId1) {
+                view1 = view;
+                index1 = i;
+                ++count;
+            } else if(id == resourceId2) {
+                view2 = view;
+                index2 = i;
+                ++count;
+            }
+        }
+        if(count == 2) {
+            if(index1 < index2) {
+                parent.removeViewAt(index2);
+                parent.removeViewAt(index1);
+                parent.addView(view2, index1);
+                parent.addView(view1, index2);
+            } else {
+                parent.removeViewAt(index1);
+                parent.removeViewAt(index2);
+                parent.addView(view1, index2);
+                parent.addView(view2, index1);
+            }
+        }
+    }
+
 }
