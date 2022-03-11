@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,9 @@ public class TesterCanvas extends AppCompatActivity{
     private ImageButton eraser, colorPicker, pen, eyeDropper;
     private ImageButton selection, paintBucket, colorPreview, shapeTool;
     private ImageButton drag, zoom, rotate;
+    private ImageButton circle, rect;
+
+    private LinearLayout shapes;
 
     //inited rangeslider object for brush stroke
     private RangeSlider rangeSlider, rangeSliderZoom, rangeSliderRotate;
@@ -87,6 +91,10 @@ public class TesterCanvas extends AppCompatActivity{
         rotate = (ImageButton) findViewById(R.id.button_rotate);
 
         dropdown = (ImageButton) findViewById(R.id.button_menu);
+
+        shapes = (LinearLayout) findViewById(R.id.CanvasUIRowShapes);
+        rect = (ImageButton) findViewById(R.id.button_rect);
+        circle = (ImageButton) findViewById(R.id.button_circle);
 
         //set default color to black
         localColor = 0;
@@ -473,11 +481,48 @@ public class TesterCanvas extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 Context context = getApplicationContext();
-                CharSequence text = "Pen Tool Not Implemented";
+                CharSequence text = "Shape Tool";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+                //shapes.setVisibility(View.VISIBLE);
+                if(shapes.getVisibility() == View.VISIBLE)
+                    shapes.setVisibility(View.GONE);
+                else
+                    shapes.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //OnClick Listener for rectangle Tool
+        rect.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                Context context = getApplicationContext();
+                CharSequence text = "Rectangle Tool";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                //TODO: draw the rectangle
+            }
+        });
+
+        //OnClick Listener for circle Tool
+        circle.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                Context context = getApplicationContext();
+                CharSequence text = "Circle Tool";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                //TODO: draw the circle
             }
         });
 

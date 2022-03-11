@@ -61,6 +61,8 @@ public class DrawView extends View {
 
     }
 
+
+
     //instantiation of bitmap and brush settings
     public void init(int height, int width, int background, String path) {
         backgroundColor = background;
