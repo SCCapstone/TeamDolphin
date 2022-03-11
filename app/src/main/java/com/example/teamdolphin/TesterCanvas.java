@@ -65,27 +65,6 @@ public class TesterCanvas extends AppCompatActivity {
     private GridLayout toolGridLayout;
     private int buttonPrimaryColor;
 
-    //Swaps two buttons positions
-    public void swapButtons(ImageButton currentlySelected, ImageButton wantSelected) {
-        if(currentlySelected==wantSelected)
-            return;
-        //updateArraylist
-        int indexOfCurrentSelected = 2;
-        int indexOfWantSelected = 0;
-        for (int i = 0; i < buttonList.size(); i++) {
-            if (buttonList.get(i).getId() == wantSelected.getId()) {
-                indexOfWantSelected = i;
-            }
-        }
-        //System.out.println("Current: " + indexOfCurrentSelected + " Want: " + indexOfWantSelected);
-        swap(toolGridLayout, currentlySelected.getId(), wantSelected.getId());
-        //System.out.println("ID: " + brush.getId());
-        Collections.swap(buttonList, indexOfCurrentSelected, indexOfWantSelected);
-        currentlyPrimaryButton = wantSelected;
-        wantSelected.setColorFilter(Color.BLUE);
-        currentlySelected.setColorFilter(Color.DKGRAY);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,7 +127,7 @@ public class TesterCanvas extends AppCompatActivity {
         //set default color to black
         localColor = 0;
         //holds current color of brush
-        brushColor = 0;
+        brushColor = Color.BLACK;
         //holds eraser value for canvas
         eraserColor = 0;
 
@@ -531,6 +510,35 @@ public class TesterCanvas extends AppCompatActivity {
                     }
                 });
         colorPickerDialogue.show();
+    }
+
+    //Hides all the rows with tools except first
+    public void closeDropDown(){
+        for(int i = 4; i < buttonList.size(); i++) {
+            buttonList.get(i).setVisibility(View.GONE);
+        }
+    }
+
+    //Swaps two buttons positions
+    public void swapButtons(ImageButton currentlySelected, ImageButton wantSelected) {
+        if(currentlySelected==wantSelected)
+            return;
+        //updateArraylist
+        int indexOfCurrentSelected = 2;
+        int indexOfWantSelected = 0;
+        for (int i = 0; i < buttonList.size(); i++) {
+            if (buttonList.get(i).getId() == wantSelected.getId()) {
+                indexOfWantSelected = i;
+            }
+        }
+        //System.out.println("Current: " + indexOfCurrentSelected + " Want: " + indexOfWantSelected);
+        swap(toolGridLayout, currentlySelected.getId(), wantSelected.getId());
+        //System.out.println("ID: " + brush.getId());
+        Collections.swap(buttonList, indexOfCurrentSelected, indexOfWantSelected);
+        currentlyPrimaryButton = wantSelected;
+        wantSelected.setColorFilter(Color.BLUE);
+        currentlySelected.setColorFilter(Color.DKGRAY);
+        closeDropDown();
     }
 
     //https://stackoverflow.com/questions/71431781/how-to-swap-elements-in-a-grid-layout-android
