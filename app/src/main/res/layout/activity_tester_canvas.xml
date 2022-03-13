@@ -64,7 +64,7 @@
                 android:text="Color Picker" />
 
             <ImageButton
-                android:id="@+id/button_brush"
+                android:id="@+id/button_primary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -80,6 +80,16 @@
                 android:layout_columnWeight="1"
                 android:src="@drawable/menu_icon"
                 android:text="Stroke" />
+
+            <ImageButton
+                android:id="@+id/button_brush"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_columnWeight="1"
+                android:src="@drawable/brush_24"
+                android:visibility="gone"
+                android:text="Brush" />
 
             <ImageButton
                 android:id="@+id/button_eraser"
