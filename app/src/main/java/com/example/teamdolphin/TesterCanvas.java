@@ -71,38 +71,38 @@ public class TesterCanvas extends AppCompatActivity {
         setContentView(R.layout.activity_tester_canvas);
 
         //getting the references needed to construct canvas page
-        paint = (DrawView) findViewById(R.id.draw_view);
-        rangeSlider = (RangeSlider) findViewById(R.id.rangebar);
-        rangeSliderZoom = (RangeSlider) findViewById(R.id.rangebarzoom);
-        rangeSliderRotate = (RangeSlider) findViewById(R.id.rangebarrotate);
-        undo = (ImageButton) findViewById(R.id.button_undo);
-        save = (ImageButton) findViewById(R.id.button_save);
+        paint = findViewById(R.id.draw_view);
+        rangeSlider = findViewById(R.id.rangebar);
+        rangeSliderZoom = findViewById(R.id.rangebarzoom);
+        rangeSliderRotate = findViewById(R.id.rangebarrotate);
+        undo = findViewById(R.id.button_undo);
+        save = findViewById(R.id.button_save);
         primaryButton = findViewById(R.id.button_primary);
-        brush = (ImageButton) findViewById(R.id.button_brush);
-        home = (ImageButton) findViewById(R.id.button_home);
+        brush = findViewById(R.id.button_brush);
+        home = findViewById(R.id.button_home);
 
         //second row tools for canvas UI
-        eraser = (ImageButton) findViewById(R.id.button_eraser);
-        colorPicker = (ImageButton) findViewById(R.id.button_color);
-        pen = (ImageButton) findViewById(R.id.button_pen);
-        eyeDropper = (ImageButton) findViewById(R.id.button_eyedropper);
+        eraser = findViewById(R.id.button_eraser);
+        colorPicker = findViewById(R.id.button_color);
+        pen = findViewById(R.id.button_pen);
+        eyeDropper = findViewById(R.id.button_eyedropper);
 
         //third row tools for canvas UI
-        selection = (ImageButton) findViewById(R.id.button_selection);
-        paintBucket = (ImageButton) findViewById(R.id.button_paintbucket);
-        colorPreview = (ImageButton) findViewById(R.id.button_colorpreview);
-        shapeTool = (ImageButton) findViewById(R.id.button_shape);
+        selection = findViewById(R.id.button_selection);
+        paintBucket = findViewById(R.id.button_paintbucket);
+        colorPreview = findViewById(R.id.button_colorpreview);
+        shapeTool = findViewById(R.id.button_shape);
 
         //fourth row tools for canvas UI
-        drag = (ImageButton) findViewById(R.id.button_drag);
-        zoom = (ImageButton) findViewById(R.id.button_zoom);
-        rotate = (ImageButton) findViewById(R.id.button_rotate);
+        drag = findViewById(R.id.button_drag);
+        zoom = findViewById(R.id.button_zoom);
+        rotate = findViewById(R.id.button_rotate);
 
-        dropdown = (ImageButton) findViewById(R.id.button_menu);
+        dropdown = findViewById(R.id.button_menu);
 
-        shapes = (LinearLayout) findViewById(R.id.CanvasUIRowShapes);
-        rect = (ImageButton) findViewById(R.id.button_rect);
-        circle = (ImageButton) findViewById(R.id.button_circle);
+        shapes = findViewById(R.id.CanvasUIRowShapes);
+        rect = findViewById(R.id.button_rect);
+        circle = findViewById(R.id.button_circle);
 
         //set default color to black
         localColor = 0;
@@ -315,7 +315,7 @@ public class TesterCanvas extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener BrushOnClickListener = new View.OnClickListener(){
+    private final View.OnClickListener BrushOnClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
             Context context = getApplicationContext();
@@ -332,7 +332,7 @@ public class TesterCanvas extends AppCompatActivity {
             if (eraserClicked == true)
                 paint.setColor(brushColor);
             paint.setEnabled(false);
-            if (rangeSlider.getVisibility() == view.VISIBLE)
+            if (rangeSlider.getVisibility() == View.VISIBLE)
                 rangeSlider.setVisibility(View.GONE);
             else
                 rangeSlider.setVisibility(View.VISIBLE);
@@ -356,7 +356,7 @@ public class TesterCanvas extends AppCompatActivity {
             paint.setColor(eraserColor);
             paint.setEnabled(false);
             eraserClicked = true;
-            if (rangeSlider.getVisibility() == view.VISIBLE)
+            if (rangeSlider.getVisibility() == View.VISIBLE)
                 rangeSlider.setVisibility(View.GONE);
             else
                 rangeSlider.setVisibility(View.VISIBLE);
@@ -393,7 +393,7 @@ public class TesterCanvas extends AppCompatActivity {
             rangeSliderRotate.setVisibility(View.GONE);
             rangeSliderZoom.setVisibility(View.GONE);
 
-            if (eraser.getVisibility() == view.VISIBLE) {
+            if (eraser.getVisibility() == View.VISIBLE) {
                 closeDropDown();
             } else {
                 openDropDown();
@@ -441,7 +441,7 @@ public class TesterCanvas extends AppCompatActivity {
             rangeSliderRotate.setVisibility(View.GONE);
             rangeSlider.setVisibility(View.GONE);
 
-            if (rangeSliderZoom.getVisibility() == view.VISIBLE)
+            if (rangeSliderZoom.getVisibility() == View.VISIBLE)
                 rangeSliderZoom.setVisibility(View.GONE);
             else
                 rangeSliderZoom.setVisibility(View.VISIBLE);
@@ -463,7 +463,7 @@ public class TesterCanvas extends AppCompatActivity {
             rangeSlider.setVisibility(View.GONE);
             rangeSliderZoom.setVisibility(View.GONE);
 
-            if (rangeSliderRotate.getVisibility() == view.VISIBLE)
+            if (rangeSliderRotate.getVisibility() == View.VISIBLE)
                 rangeSliderRotate.setVisibility(View.GONE);
             else
                 rangeSliderRotate.setVisibility(View.VISIBLE);
