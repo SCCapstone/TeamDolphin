@@ -107,7 +107,7 @@ public class TesterCanvas extends AppCompatActivity {
         //set default color to black
         localColor = 0;
         //holds current color of brush
-        brushColor = 0;
+        brushColor = Color.BLACK;
         //holds eraser value for canvas
         eraserColor = 0;
 
