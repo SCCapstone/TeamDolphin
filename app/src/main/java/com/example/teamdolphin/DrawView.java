@@ -45,6 +45,8 @@ public class DrawView extends View {
         this(context, null);
     }
 
+    public static boolean saved = false;
+
     public DrawView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mPaint = new Paint();
@@ -167,6 +169,7 @@ public class DrawView extends View {
         }
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.restore();
+        saved = false;
     }
 
     /* when a user first touches the canvas

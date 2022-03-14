@@ -1,9 +1,11 @@
 package com.example.teamdolphin;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -401,9 +403,54 @@ public class TesterCanvas extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        if(DrawView.saved==false){
+            System.out.println("Not saved");
+            Intent intent = new Intent(TesterCanvas.this, MainActivity.class);
+            DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        save.performClick();
+                        startActivity(intent);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        startActivity(intent);
+                        break;
+                }
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do you want to save the project before leaving?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+            return;
+        }
+        super.onBackPressed();
+    }
+
     private final View.OnClickListener HomeClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            if(DrawView.saved==false){
+                System.out.println("Not saved");
+                Intent intent = new Intent(TesterCanvas.this, MainActivity.class);
+                DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            save.performClick();
+                            startActivity(intent);
+                            break;
+
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            startActivity(intent);
+                            break;
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setMessage("Do you want to save the project before leaving?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+                return;
+            }
             Intent intent = new Intent(TesterCanvas.this, MainActivity.class);
             startActivity(intent);
         }
@@ -575,6 +622,7 @@ public class TesterCanvas extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            DrawView.saved = true;
         }
     };
 }
