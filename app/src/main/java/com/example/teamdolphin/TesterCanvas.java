@@ -1,6 +1,7 @@
 package com.example.teamdolphin;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.content.ContentValues;
@@ -277,6 +279,7 @@ public class TesterCanvas extends AppCompatActivity {
                     public void onOk(AmbilWarnaDialog dialog, int color) {
                         localColor = color;
                         brushColor = color;
+                        System.out.println(brushColor+" THIS IS BRUSH COLOR");
                         paint.setColor(color);
                         colorPicker.setColorFilter(color);
                     }
@@ -314,6 +317,39 @@ public class TesterCanvas extends AppCompatActivity {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
+
+            paint.setEnabled(true);
+
+            paint.setOnTouchListener(new View.OnTouchListener() {
+                @RequiresApi(api = Build.VERSION_CODES.Q)
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    float xDown = 0;
+                    float yDown = 0;
+                    switch (event.getActionMasked()) {
+                        case MotionEvent.ACTION_DOWN:
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            xDown = event.getX();
+                            yDown = event.getY();
+                            Bitmap bitmap = paint.save();
+                            Color tempColor = bitmap.getColor((int)xDown, (int)yDown);
+                            //int colorConvertor = tempColor.toArgb(tempColor);
+                            brushColor = tempColor.toArgb();
+                            localColor = brushColor;
+                            paint.setColor(brushColor);
+                            colorPicker.setColorFilter(brushColor);
+
+                            break;
+                    }
+
+                    return true;
+                }
+            });
+
+
         }
     };
 
