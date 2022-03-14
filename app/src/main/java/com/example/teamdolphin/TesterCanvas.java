@@ -94,7 +94,7 @@ public class TesterCanvas extends AppCompatActivity {
         //third row tools for canvas UI
         selection = findViewById(R.id.button_selection);
         paintBucket = findViewById(R.id.button_paintbucket);
-        colorPreview = findViewById(R.id.button_colorpreview);
+        //colorPreview = findViewById(R.id.button_colorpreview);
         shapeTool = findViewById(R.id.button_shape);
 
         //fourth row tools for canvas UI

@@ -161,15 +161,15 @@
                 android:text="Stroke"
                 android:visibility="gone"/>
 
-            <ImageButton
-                android:id="@+id/button_colorpreview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_columnWeight="1"
-                android:src="@drawable/color_preview_icon"
-                android:text="Stroke"
-                android:visibility="gone"/>
+<!--            <ImageButton-->
+<!--                android:id="@+id/button_colorpreview"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:src="@drawable/color_preview_icon"-->
+<!--                android:text="Stroke"-->
+<!--                android:visibility="gone"/>-->
 
             <ImageButton
                 android:id="@+id/button_drag"
