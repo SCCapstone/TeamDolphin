@@ -9,7 +9,7 @@ import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 
 class ToggleTheme : Fragment() {
-
+/*
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,4 +32,5 @@ class ToggleTheme : Fragment() {
         }
         super.onViewCreated(view, savedInstanceState)
     }
+    */
 }

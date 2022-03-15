@@ -312,7 +312,7 @@ public class TesterCanvas extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Context context = getApplicationContext();
-            CharSequence text = "EyeDropper Tool Not Implemented";
+            CharSequence text = "Eye Dropper";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
