@@ -130,6 +130,13 @@ public class DrawView extends View {
         }
     }
 
+    public void createRect(int tLeft, int tRight, int bRight, int bLeft) {
+        mPaint.setStyle(Paint.Style.FILL);
+        //Rect(left, top, right, bottom);
+        mCanvas.drawRect(tLeft,tRight,bRight,bLeft, mPaint);
+
+    }
+
     //returns the current bitmap which is canvas
     public Bitmap save() {
         return mBitmap;

@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,7 +56,7 @@ public class TesterCanvas extends AppCompatActivity {
     private LinearLayout shapes;
 
     //inited rangeslider object for brush stroke
-    private RangeSlider rangeSlider, rangeSliderZoom, rangeSliderRotate;
+    private RangeSlider rangeSlider, rangeSliderZoom, rangeSliderRotate, rangeSliderCircle, rangeSliderRect;
 
     //stores the color to a local integer
     private int localColor, brushColor, eraserColor;
@@ -79,6 +80,8 @@ public class TesterCanvas extends AppCompatActivity {
         rangeSlider = findViewById(R.id.rangebar);
         rangeSliderZoom = findViewById(R.id.rangebarzoom);
         rangeSliderRotate = findViewById(R.id.rangebarrotate);
+        rangeSliderCircle = findViewById(R.id.rangebarcircle);
+        rangeSliderRect = findViewById(R.id.rangebarrectangle);
         undo = findViewById(R.id.button_undo);
         save = findViewById(R.id.button_save);
         primaryButton = findViewById(R.id.button_primary);
@@ -175,6 +178,7 @@ public class TesterCanvas extends AppCompatActivity {
 
         //listener for when the user sets a new brush size
         rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
                 paint.setStrokeWidth((int) value);
@@ -185,6 +189,7 @@ public class TesterCanvas extends AppCompatActivity {
 
 
         rangeSliderZoom.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
                 System.out.println("Value changed to " + value); //okay, the value is changing
@@ -194,6 +199,7 @@ public class TesterCanvas extends AppCompatActivity {
         });
 
         rangeSliderRotate.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 
@@ -236,33 +242,97 @@ public class TesterCanvas extends AppCompatActivity {
         shapeTool.setOnClickListener(ShapeToolOnClickListener);
 
         //OnClick Listener for rectangle Tool
+        rangeSliderRect.setValueFrom(0.0f);
+        rangeSliderRect.setValueTo(1500.0f);
+        final boolean[] rectClickedBefore = {false};
         rect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
-                CharSequence text = "Rectangle Tool";
-                int duration = Toast.LENGTH_SHORT;
+                if (rectClickedBefore[0] == false)
+                {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Rectangle Tool";
+                    int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    final float[] range = {100};
+                    rangeSliderRect.addOnChangeListener(new RangeSlider.OnChangeListener() {
+                        @SuppressLint("RestrictedApi")
+                        @Override
+                        public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                            range[0] = value;
+                        }
+                    });
+                    rangeSliderRect.setVisibility(View.VISIBLE);
+                    rectClickedBefore[0] = true;
+                    paint.setEnabled(true);
+                    paint.setOnTouchListener(new View.OnTouchListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.Q)
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            float xDown = 0;
+                            float yDown = 0;
 
-                //TODO: draw the rectangle
+
+                            switch (event.getActionMasked()) {
+                                case MotionEvent.ACTION_DOWN:
+                                    xDown = event.getX();
+                                    yDown = event.getY();
+                                    //Rect(left, top, right, bottom);
+
+                                    paint.createRect(((int) xDown), ((int) yDown), ((int) xDown) + ((int) range[0]), ((int) yDown) + ((int) range[0]));
+                                    //TODO: bug: Rectangle only shows after moving rectangle slider
+                                    //TODO: bug: Rectangle disappears after switching tools
+                                    break;
+                                case MotionEvent.ACTION_MOVE:
+                                    break;
+                                case MotionEvent.ACTION_UP:
+                                    break;
+                            }
+
+                            return true;
+                        }
+                    });
+                } else {
+                    rangeSliderRect.setVisibility(View.GONE);
+                    rectClickedBefore[0] = false;
+                }
             }
         });
 
+        final boolean[] circleClickedBefore = {false};
         //OnClick Listener for circle Tool
         circle.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
-                CharSequence text = "Circle Tool";
-                int duration = Toast.LENGTH_SHORT;
+                if(circleClickedBefore[0] == false) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Circle Tool";
+                    int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    rangeSliderCircle.setVisibility(View.VISIBLE);
+                    circleClickedBefore[0] = true;
+                } else {
+                    rangeSliderCircle.setVisibility(View.GONE);
+                    circleClickedBefore[0] = false;
+                }
 
-                //TODO: draw the circle
             }
+        });
+        rangeSliderCircle.setValueFrom(0.0f);
+        rangeSliderCircle.setValueTo(1500.0f);
+        rangeSliderCircle.addOnChangeListener(new RangeSlider.OnChangeListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+
+                paint.setStrokeWidth((int) value);
+            }
+
         });
     }
 
@@ -366,6 +436,8 @@ public class TesterCanvas extends AppCompatActivity {
             //Ensure all other range sliders are disabled
             rangeSliderRotate.setVisibility(View.GONE);
             rangeSliderZoom.setVisibility(View.GONE);
+            rangeSliderCircle.setVisibility(View.GONE);
+            rangeSliderRect.setVisibility(View.GONE);
 
             if (eraserClicked == true)
                 paint.setColor(brushColor);
@@ -390,6 +462,8 @@ public class TesterCanvas extends AppCompatActivity {
             //Ensure all other sliders disable
             rangeSliderRotate.setVisibility(View.GONE);
             rangeSliderZoom.setVisibility(View.GONE);
+            rangeSliderCircle.setVisibility(View.GONE);
+            rangeSliderRect.setVisibility(View.GONE);
 
             paint.setColor(eraserColor);
             paint.setEnabled(false);
@@ -430,7 +504,8 @@ public class TesterCanvas extends AppCompatActivity {
             rangeSlider.setVisibility(View.GONE);
             rangeSliderRotate.setVisibility(View.GONE);
             rangeSliderZoom.setVisibility(View.GONE);
-
+            rangeSliderCircle.setVisibility(View.GONE);
+            rangeSliderRect.setVisibility(View.GONE);
             if (eraser.getVisibility() == View.VISIBLE) {
                 closeDropDown();
             } else {
