@@ -91,11 +91,11 @@ public class TesterCanvas extends AppCompatActivity {
         //second row tools for canvas UI
         eraser = findViewById(R.id.button_eraser);
         colorPicker = findViewById(R.id.button_color);
-        pen = findViewById(R.id.button_pen);
+        //pen = findViewById(R.id.button_pen);
         eyeDropper = findViewById(R.id.button_eyedropper);
 
         //third row tools for canvas UI
-        selection = findViewById(R.id.button_selection);
+        //selection = findViewById(R.id.button_selection);
         paintBucket = findViewById(R.id.button_paintbucket);
         //colorPreview = findViewById(R.id.button_colorpreview);
         shapeTool = findViewById(R.id.button_shape);
@@ -240,6 +240,33 @@ public class TesterCanvas extends AppCompatActivity {
 
         //OnClick Listener for Shape Tool
         shapeTool.setOnClickListener(ShapeToolOnClickListener);
+
+        //Pen tool needs to be implemented or removed
+        /*pen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "Pen Tool";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });*/
+
+        //paint bucket needs to be implemented
+        paintBucket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "Paint Bucket";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                primaryButton.setImageDrawable(paintBucket.getDrawable());
+            }
+        });
 
         //OnClick Listener for rectangle Tool
         rangeSliderRect.setValueFrom(0.0f);
@@ -432,7 +459,7 @@ public class TesterCanvas extends AppCompatActivity {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-
+            primaryButton.setImageDrawable(brush.getDrawable());
             //Ensure all other range sliders are disabled
             rangeSliderRotate.setVisibility(View.GONE);
             rangeSliderZoom.setVisibility(View.GONE);
@@ -576,6 +603,7 @@ public class TesterCanvas extends AppCompatActivity {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
+            primaryButton.setImageDrawable(shapeTool.getDrawable());
             //shapes.setVisibility(View.VISIBLE);
             if (shapes.getVisibility() == View.VISIBLE)
                 shapes.setVisibility(View.GONE);
