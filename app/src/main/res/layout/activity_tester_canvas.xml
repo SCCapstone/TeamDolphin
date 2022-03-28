@@ -95,11 +95,12 @@
                 android:id="@+id/button_eraser"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_columnWeight="1"
-                android:src="@drawable/eraser_icon"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/eraser_vector"
                 android:text="Undo"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/button_shape"
@@ -107,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_columnWeight="1"
-                android:src="@drawable/shapes_icon"
+                android:src="@drawable/shapes_vector"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
@@ -117,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_columnWeight="1"
-                android:src="@drawable/eyedropper_icon"
+                android:src="@drawable/eye_dropper_vector"
                 android:text="Stroke"
                 android:visibility="gone"/>
 
@@ -131,7 +132,7 @@
                 android:text="Save"
                 android:visibility="gone"/>
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/button_selection"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -139,7 +140,7 @@
                 android:layout_columnWeight="1"
                 android:src="@drawable/select_icon"
                 android:text="Undo"
-                android:visibility="gone"/>
+                android:visibility="gone"/> -->
 
             <ImageButton
                 android:id="@+id/button_paintbucket"
@@ -147,19 +148,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_columnWeight="1"
-                android:src="@drawable/paintbucket_icon"
+                android:src="@drawable/paint_bucket_vector"
                 android:text="Save"
                 android:visibility="gone"/>
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/button_pen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_columnWeight="1"
-                android:src="@drawable/pen_icon"
+                android:src="@drawable/pen_vector"
                 android:text="Stroke"
-                android:visibility="gone"/>
+                android:visibility="gone"/> -->
 
 <!--            <ImageButton-->
 <!--                android:id="@+id/button_colorpreview"-->
@@ -273,7 +274,7 @@
             android:layout_weight="1"
             android:text="Stroke"
             android:visibility="visible"
-            app:srcCompat="@drawable/circle_icon" />
+            app:srcCompat="@drawable/circle_vector" />
     </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -298,17 +299,12 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
         </LinearLayout>
-        <LinearLayout
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/rangebareraser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.google.android.material.slider.RangeSlider
-                android:id="@+id/rangebareraser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-        </LinearLayout>
+            android:visibility="gone" />
 
     </LinearLayout>
 

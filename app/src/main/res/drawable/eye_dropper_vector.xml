@@ -1,0 +1,8 @@
+<!-- Eye dropper icon from SVG Repo from https://www.svgrepo.com/ -->
+<vector android:height="24dp" android:viewportHeight="511.999"
+    android:viewportWidth="511.999" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FF000000" android:pathData="M447.655,14.15c-18.867,-18.866 -49.456,-18.866 -68.322,0l-72.958,72.957l-22.45,-22.45l-39.384,39.384l113.222,113.222l39.384,-39.384l-22.45,-22.45l72.958,-72.958C466.521,63.604 466.521,33.016 447.655,14.15z"/>
+    <path android:fillColor="#FF000000" android:pathData="M243.38,150.101l-92.782,92.783l136.644,0l24.46,-24.46z"/>
+    <path android:fillColor="#FF000000" android:pathData="M117.538,276.276l-33.632,101.622l102.119,-33.797l67.826,-67.825z"/>
+    <path android:fillColor="#FF000000" android:pathData="M83.906,414.399c-11.645,15.275 -33.711,40.452 -33.711,63.89c0,18.618 15.093,33.711 33.711,33.711c18.618,0 33.711,-15.093 33.711,-33.711C117.616,454.851 95.55,429.674 83.906,414.399z"/>
+</vector>
