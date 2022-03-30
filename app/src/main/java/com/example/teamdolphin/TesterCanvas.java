@@ -392,6 +392,12 @@ public class TesterCanvas extends AppCompatActivity {
         primaryButton.setOnClickListener(listener);
         primaryButton.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.OVERLAY);
         closeDropDown();
+
+        if(selectedButton.getId()==shapeTool.getId()){
+            shapes.setVisibility(View.VISIBLE);
+        }else{
+            shapes.setVisibility(View.GONE);
+        }
     }
 
     private final View.OnClickListener EyeDropperOnClickListener = new View.OnClickListener() {
