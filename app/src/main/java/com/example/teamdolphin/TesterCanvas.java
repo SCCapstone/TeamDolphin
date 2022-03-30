@@ -255,18 +255,7 @@ public class TesterCanvas extends AppCompatActivity {
         });*/
 
         //paint bucket needs to be implemented
-        paintBucket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = getApplicationContext();
-                CharSequence text = "Paint Bucket";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-                primaryButton.setImageDrawable(paintBucket.getDrawable());
-            }
-        });
+        paintBucket.setOnClickListener(PaintBucketOnClickListener);
 
         //OnClick Listener for rectangle Tool
         rangeSliderRect.setValueFrom(0.0f);
@@ -445,7 +434,7 @@ public class TesterCanvas extends AppCompatActivity {
                     return true;
                 }
             });
-
+            copyPrimaryButtonFrom(eyeDropper, EyeDropperOnClickListener);
 
         }
     };
@@ -473,6 +462,7 @@ public class TesterCanvas extends AppCompatActivity {
                 rangeSlider.setVisibility(View.GONE);
             else
                 rangeSlider.setVisibility(View.VISIBLE);
+            copyPrimaryButtonFrom(brush, BrushOnClickListener);
 
         }
     };
@@ -654,6 +644,20 @@ public class TesterCanvas extends AppCompatActivity {
             else
                 rangeSliderRotate.setVisibility(View.VISIBLE);
             copyPrimaryButtonFrom(rotate, RotateOnClickListener);
+        }
+    };
+
+    private final View.OnClickListener PaintBucketOnClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            Context context = getApplicationContext();
+            CharSequence text = "Paint Bucket";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            primaryButton.setImageDrawable(paintBucket.getDrawable());
+            copyPrimaryButtonFrom(paintBucket, RotateOnClickListener);
         }
     };
 
