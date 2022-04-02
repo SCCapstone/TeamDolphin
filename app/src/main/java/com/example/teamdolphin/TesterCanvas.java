@@ -198,13 +198,16 @@ public class TesterCanvas extends AppCompatActivity {
                 paint.setScaleY(value * 3);
             }
         });
-
+        rangeSliderRotate.setValueFrom(0.0f);
+        rangeSliderRotate.setValueTo(360.0f);
+        rangeSliderRotate.setStepSize(1f);
         rangeSliderRotate.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @SuppressLint("RestrictedApi")
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 
-                paint.setRotation(value * 360);
+                paint.setRotation(value);
+
             }
 
         });
