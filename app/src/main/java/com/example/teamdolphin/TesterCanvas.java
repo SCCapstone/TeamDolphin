@@ -69,7 +69,8 @@ public class TesterCanvas extends AppCompatActivity {
     //Buttons list
     private ImageButton[] buttonsList;
     private ImageButton primaryButton;
-
+    float previousBrushSize = 0;
+    int correctedSize = -9999;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -461,6 +462,9 @@ public class TesterCanvas extends AppCompatActivity {
             rangeSliderCircle.setVisibility(View.GONE);
             rangeSliderRect.setVisibility(View.GONE);
 
+            if( paint.getStrokeWidth() == correctedSize )
+                paint.setStrokeWidth((int) previousBrushSize);
+
             if (eraserClicked == true)
                 paint.setColor(brushColor);
             paint.setEnabled(false);
@@ -664,6 +668,17 @@ public class TesterCanvas extends AppCompatActivity {
             toast.show();
             primaryButton.setImageDrawable(paintBucket.getDrawable());
             copyPrimaryButtonFrom(paintBucket, RotateOnClickListener);
+            int height = paint.getMeasuredHeight();
+            int width = paint.getMeasuredWidth();
+            int size;
+            if(height > width) {
+                size = height;
+            } else {
+                size = width;
+            }
+            correctedSize = size*4;
+            previousBrushSize = paint.getStrokeWidth();
+            paint.setStrokeWidth(correctedSize);
         }
     };
 

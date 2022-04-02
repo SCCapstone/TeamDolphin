@@ -121,6 +121,8 @@ public class DrawView extends View {
         strokeWidth = width;
     }
 
+    public int getStrokeWidth() { return strokeWidth; }
+
     //uses the array list to check for a previous stroke to undo
     public void undo() {
         System.out.println("Size path: "+paths.size());
