@@ -258,14 +258,14 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <ImageButton
-            android:id="@+id/button_rect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Stroke"
-            android:visibility="visible"
-            app:srcCompat="@drawable/square_icon" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/button_rect"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Stroke"-->
+<!--            android:visibility="visible"-->
+<!--            app:srcCompat="@drawable/square_icon" />-->
 
         <ImageButton
             android:id="@+id/button_circle"
