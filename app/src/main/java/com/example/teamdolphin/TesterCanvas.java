@@ -34,6 +34,7 @@ import androidx.annotation.NonNull;
 import com.google.android.material.slider.RangeSlider;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.time.chrono.Era;
 
@@ -748,6 +749,14 @@ public class TesterCanvas extends AppCompatActivity {
 
             //name of file current a preset
             String projectName = FileCreation.Companion.getProjectNameString() + ".png";
+
+            //if the file exists, overwrite it.
+            String duplicateFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/DolphinArt Projects/" + projectName;
+            File dupFile = new File(duplicateFile);
+            if(dupFile.exists()){
+                dupFile.delete();
+            }
+
             contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, projectName);
 
             //filetype that we will be using now PNG
@@ -768,6 +777,7 @@ public class TesterCanvas extends AppCompatActivity {
 
             //get the Uri of the file which is to be created in the storage
             Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
             try {
                 //open the output stream with the above uri
                 imageOutStream = getContentResolver().openOutputStream(uri);
