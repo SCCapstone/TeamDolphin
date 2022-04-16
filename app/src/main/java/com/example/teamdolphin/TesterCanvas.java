@@ -73,6 +73,7 @@ public class TesterCanvas extends AppCompatActivity {
     float previousBrushSize = 16;
     int correctedSize = -9999;
     int currentRotation = 0;
+    float currentZoom = 0.33f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,6 +198,7 @@ public class TesterCanvas extends AppCompatActivity {
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
                 System.out.println("Value changed to " + value); //okay, the value is changing
+                currentZoom = value;
                 paint.setScaleX(value * 3);
                 paint.setScaleY(value * 3);
             }
@@ -652,6 +654,9 @@ public class TesterCanvas extends AppCompatActivity {
             //Set all other range sliders to invisible
             rangeSliderRotate.setVisibility(View.GONE);
             rangeSlider.setVisibility(View.GONE);
+            rangeSliderZoom.setValueFrom(0.1f);
+            rangeSliderZoom.setValueTo(0.99f);
+            rangeSliderZoom.setValues(currentZoom);
 
             if (rangeSliderZoom.getVisibility() == View.VISIBLE)
                 rangeSliderZoom.setVisibility(View.GONE);
