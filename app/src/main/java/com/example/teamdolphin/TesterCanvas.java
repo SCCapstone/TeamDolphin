@@ -698,7 +698,6 @@ public class TesterCanvas extends AppCompatActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
             primaryButton.setImageDrawable(paintBucket.getDrawable());
-            copyPrimaryButtonFrom(paintBucket, RotateOnClickListener);
             int height = paint.getMeasuredHeight();
             int width = paint.getMeasuredWidth();
             int size;
@@ -710,6 +709,7 @@ public class TesterCanvas extends AppCompatActivity {
             correctedSize = size*4;
             //previousBrushSize = paint.getStrokeWidth();
             paint.setStrokeWidth(correctedSize);
+            copyPrimaryButtonFrom(paintBucket, PaintBucketOnClickListener);
         }
     };
 
