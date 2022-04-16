@@ -559,6 +559,8 @@ public class TesterCanvas extends AppCompatActivity {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
+            paint.setScaleX(1);
+            paint.setScaleY(1);
             paint.setRotation(0);
             paint.setX(0);
             paint.setY(0);
