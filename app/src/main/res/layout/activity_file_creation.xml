@@ -50,6 +50,7 @@
         android:src="@drawable/cancel_icon"
         app:layout_constraintStart_toEndOf="@+id/text_createProject"
         android:name="com.example.teamdolphin.ToggleTheme"
+        android:background="@null"
         app:layout_constraintTop_toBottomOf="@+id/appbar_container" />
 
     <ImageView
@@ -71,6 +72,7 @@
         android:padding="0dp"
         android:scaleType="fitCenter"
         android:src="@drawable/import_icon"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/image_preview_container"
         app:layout_constraintStart_toEndOf="@+id/image_preview_container" />
 
