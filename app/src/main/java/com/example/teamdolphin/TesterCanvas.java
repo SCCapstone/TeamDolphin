@@ -51,7 +51,7 @@ public class TesterCanvas extends AppCompatActivity {
 
     private ImageButton eraser, colorPicker, pen, eyeDropper;
     private ImageButton selection, paintBucket, colorPreview, shapeTool;
-    private ImageButton drag, zoom, rotate;
+    private ImageButton drag, zoom, rotate, fixView;
     private ImageButton circle, rect;
 
     private LinearLayout shapes;
@@ -70,8 +70,9 @@ public class TesterCanvas extends AppCompatActivity {
     //Buttons list
     private ImageButton[] buttonsList;
     private ImageButton primaryButton;
-    float previousBrushSize = 0;
+    float previousBrushSize = 16;
     int correctedSize = -9999;
+    int currentRotation = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +90,7 @@ public class TesterCanvas extends AppCompatActivity {
         primaryButton = findViewById(R.id.button_primary);
         brush = findViewById(R.id.button_brush);
         home = findViewById(R.id.button_home);
+        fixView = findViewById(R.id.button_fix_view);
 
         //second row tools for canvas UI
         eraser = findViewById(R.id.button_eraser);
@@ -184,7 +186,7 @@ public class TesterCanvas extends AppCompatActivity {
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
                 paint.setStrokeWidth((int) value);
-                //this was used during testing
+                previousBrushSize = (int) value;
                 //brushSize = value;
             }
         });
@@ -206,7 +208,7 @@ public class TesterCanvas extends AppCompatActivity {
             @SuppressLint("RestrictedApi")
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-
+                currentRotation = (int) value;
                 paint.setRotation(value);
 
             }
@@ -245,7 +247,7 @@ public class TesterCanvas extends AppCompatActivity {
 
         //OnClick Listener for Shape Tool
         shapeTool.setOnClickListener(ShapeToolOnClickListener);
-
+        fixView.setOnClickListener(fixViewOnClickListener);
         //Pen tool needs to be implemented or removed
         /*pen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -350,7 +352,7 @@ public class TesterCanvas extends AppCompatActivity {
             @SuppressLint("RestrictedApi")
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-
+                //previousBrushSize = paint.getStrokeWidth();
                 paint.setStrokeWidth((int) value);
             }
 
@@ -459,6 +461,7 @@ public class TesterCanvas extends AppCompatActivity {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
+            paint.setStrokeWidth((int) previousBrushSize);
             primaryButton.setImageDrawable(brush.getDrawable());
             //Ensure all other range sliders are disabled
             rangeSliderRotate.setVisibility(View.GONE);
@@ -466,8 +469,10 @@ public class TesterCanvas extends AppCompatActivity {
             rangeSliderCircle.setVisibility(View.GONE);
             //rangeSliderRect.setVisibility(View.GONE);
 
-            if( paint.getStrokeWidth() == correctedSize )
-                paint.setStrokeWidth((int) previousBrushSize);
+            //if( paint.getStrokeWidth() == correctedSize ) {
+                //paint.setStrokeWidth((int) previousBrushSize);
+                //System.out.println("correctedSize = " + correctedSize + "\npreviousBrushSize = " + previousBrushSize + "\ncurrent brush size = " + paint.getStrokeWidth());
+            //}
 
             if (eraserClicked == true)
                 paint.setColor(brushColor);
@@ -480,6 +485,7 @@ public class TesterCanvas extends AppCompatActivity {
 
         }
     };
+
 
     private final View.OnClickListener EraserOnClickListener = new View.OnClickListener() {
         @Override
@@ -542,6 +548,20 @@ public class TesterCanvas extends AppCompatActivity {
             } else {
                 openDropDown();
             }
+        }
+    };
+
+    private final View.OnClickListener fixViewOnClickListener = new View.OnClickListener() {
+        public void onClick(View view) {
+            Context context = getApplicationContext();
+            CharSequence text = "Return Canvas to Standard Position";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            paint.setRotation(0);
+            paint.setX(0);
+            paint.setY(0);
         }
     };
 
@@ -681,7 +701,7 @@ public class TesterCanvas extends AppCompatActivity {
                 size = width;
             }
             correctedSize = size*4;
-            previousBrushSize = paint.getStrokeWidth();
+            //previousBrushSize = paint.getStrokeWidth();
             paint.setStrokeWidth(correctedSize);
         }
     };
@@ -694,17 +714,26 @@ public class TesterCanvas extends AppCompatActivity {
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-            if (dragClickedBefore == false) {
+            final float[] xDis = {0};
+            final float[] yDis = {0};
                 paint.setEnabled(true);
                 paint.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
+                        //paint.setRotation(0);
                         float xDown = 0;
                         float yDown = 0;
                         switch (event.getActionMasked()) {
                             case MotionEvent.ACTION_DOWN:
+                                paint.setRotation(0);
                                 xDown = event.getX();
                                 yDown = event.getY();
+                                xDis[0] = event.getX();
+                                yDis[0] = event.getY();
+                                //paint.setRotation(currentRotation);
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                paint.setRotation(currentRotation);
                                 break;
                             case MotionEvent.ACTION_MOVE:
                                 float movedX, movedY;
@@ -714,22 +743,20 @@ public class TesterCanvas extends AppCompatActivity {
                                 float distanceX = movedX - xDown;
                                 float distanceY = movedY - yDown;
 
-                                paint.setX(paint.getX() + distanceX);
-                                paint.setY(paint.getY() + distanceY);
+                                paint.setX(paint.getX() + distanceX - xDis[0]);
+                                paint.setY(paint.getY() + distanceY - yDis[0]);
+
 
                                 xDown = movedX;
                                 yDown = movedY;
                                 dragClickedBefore = true;
                                 break;
                         }
-
+                        //paint.setRotation(currentRotation);
                         return true;
                     }
                 });
-            } else {
-                paint.setEnabled(false);
-                dragClickedBefore = false;
-            }
+
             //paint.drag();
             //paint.setCameraDistance();
             copyPrimaryButtonFrom(drag, DragOnClickListener);
