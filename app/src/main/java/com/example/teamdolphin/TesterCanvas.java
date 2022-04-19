@@ -692,7 +692,7 @@ public class TesterCanvas extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Context context = getApplicationContext();
-            CharSequence text = "Paint Bucket";
+            CharSequence text = "Paint Dumper";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -708,6 +708,11 @@ public class TesterCanvas extends AppCompatActivity {
             }
             correctedSize = size*4;
             //previousBrushSize = paint.getStrokeWidth();
+
+            if (eraserClicked == true)
+                paint.setColor(brushColor);
+            paint.setEnabled(false);
+
             paint.setStrokeWidth(correctedSize);
             copyPrimaryButtonFrom(paintBucket, PaintBucketOnClickListener);
         }
