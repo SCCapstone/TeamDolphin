@@ -505,6 +505,7 @@ public class TesterCanvas extends AppCompatActivity {
             //rangeSliderRect.setVisibility(View.GONE);
 
             paint.setColor(eraserColor);
+            paint.setStrokeWidth((int) previousBrushSize);
             paint.setEnabled(false);
             eraserClicked = true;
             if (rangeSlider.getVisibility() == View.VISIBLE)
