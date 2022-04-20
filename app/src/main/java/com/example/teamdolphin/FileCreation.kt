@@ -57,6 +57,10 @@ class FileCreation : AppCompatActivity() {
                         Toast.makeText(this, "Enter a valid width and height(1-2000)", Toast.LENGTH_SHORT).show()
                         appropriateSize = false
                     }
+                }else if((projectWidth.text.isNotEmpty()&&projectHeight.text.isEmpty())||(projectWidth.text.isEmpty()&&projectHeight.text.isNotEmpty()))
+                {
+                    Toast.makeText(this, "Please put other dimension value", Toast.LENGTH_SHORT).show()
+                    appropriateSize = false;
                 }
                 intent.putExtra("background", backgroundColor)
                 if(appropriateSize){
