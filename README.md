@@ -28,6 +28,20 @@ To create an APK file
 * create a new key or use a pre exisiting key
 * click on release and then finish
 
+# How To Use
+
+1. Click on "New" button on top left of home screen.
+2. Create a canvas to fit your preference, or insert a picture from the storage of your Android device.
+3. Click "Create" button to enter the digital painting screen.
+4. Use any available tools to create image on canvas as desired.
+5. Click "Save" button to save your work to the Android device's local storage.
+6. Click "Home" button to return to home screen. If your image is saved, it will show up on the "Home" screen for ease of accessibility.
+
+# Video
+
+https://user-images.githubusercontent.com/46459789/164307810-bbbfed88-fcda-4ec0-8802-3914c7048a24.mp4
+
+
 # Screenshots
 
 <img src= "https://user-images.githubusercontent.com/46459789/164306186-ad63e305-25c0-4e3f-86db-a9ce5917e7ba.png" width="360">
@@ -59,12 +73,12 @@ For Behavioral Tests: The Installed Phone will be launched(Pixel 2 API 30 is use
 
 # Authors
 
-Tyson Medlin        -   tjmedlin@email.sc.edu
+Tyson Medlin        -   tjmedlin@email.sc.edu -  https://github.com/TysonMedlin
 
-Luis Canales        -   lcanales@email.sc.edu
+Luis Canales        -   lcanales@email.sc.edu -  https://github.com/CanalesLuis
 
-Rachel Jessee       -   rljessee@email.sc.edu
+Rachel Jessee       -   rljessee@email.sc.edu -  https://github.com/Rljessee
 
-George Pegues       -   gpegues@email.sc.edu
+George Pegues       -   gpegues@email.sc.edu  -  https://github.com/GeorgePegues
 
-Prathamjeet Singh   -   psingh@email.sc.edu
+Prathamjeet Singh   -   psingh@email.sc.edu   -  https://github.com/IshuSingh1
