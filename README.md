@@ -39,8 +39,9 @@ To create an APK file
 
 # Video
 
-https://user-images.githubusercontent.com/46459789/164307810-bbbfed88-fcda-4ec0-8802-3914c7048a24.mp4
-
+<video width="320" height="240" controls>
+  <source type="video/mp4" src="https://user-images.githubusercontent.com/46459789/164307810-bbbfed88-fcda-4ec0-8802-3914c7048a24.mp4">
+</video>
 
 # Screenshots
 
