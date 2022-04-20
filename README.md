@@ -1,5 +1,5 @@
 # TeamDolphin
-
+<img src= "https://user-images.githubusercontent.com/54644643/152239341-6ced9589-8296-4816-ac72-9e4debb4531b.png" width="50">
 Android app that is a general art creation program. Users will be able to use standard art creation program functionalities.
 
 [Project Detailed Description](https://github.com/SCCapstone/TeamDolphin/wiki/Project-Description)
