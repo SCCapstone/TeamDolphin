@@ -662,7 +662,7 @@ public class TesterCanvas extends AppCompatActivity {
                 rangeSliderZoom.setVisibility(View.GONE);
             else
                 rangeSliderZoom.setVisibility(View.VISIBLE);
-            copyPrimaryButtonFrom(zoom, ZoomOnClickListener);
+            //copyPrimaryButtonFrom(zoom, ZoomOnClickListener);
 
         }
     };
