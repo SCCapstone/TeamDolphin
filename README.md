@@ -1,5 +1,6 @@
 # TeamDolphin
 <img src= "https://user-images.githubusercontent.com/54644643/152239341-6ced9589-8296-4816-ac72-9e4debb4531b.png" width="50">
+
 Android app that is a general art creation program. Users will be able to use standard art creation program functionalities.
 
 [Project Detailed Description](https://github.com/SCCapstone/TeamDolphin/wiki/Project-Description)
@@ -26,6 +27,13 @@ To create an APK file
 * Select APK and click next
 * create a new key or use a pre exisiting key
 * click on release and then finish
+
+# Screenshots
+
+<img src= "https://user-images.githubusercontent.com/46459789/164306186-ad63e305-25c0-4e3f-86db-a9ce5917e7ba.png" width="360">
+<img src= "https://user-images.githubusercontent.com/46459789/164306174-5d82f1a8-ae0d-491a-a62a-b601811b5af3.png" width="360">
+<img src= "https://user-images.githubusercontent.com/46459789/164306160-cf939b4c-8e60-40da-b139-aa5824980187.png" width="360">
+
 
 # Testing
 
