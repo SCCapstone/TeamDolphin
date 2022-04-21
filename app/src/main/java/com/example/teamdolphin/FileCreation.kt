@@ -50,10 +50,8 @@ class FileCreation : AppCompatActivity() {
                 if(projectWidth.text.isNotEmpty()&&projectHeight.text.isNotEmpty()) {
                     intent.putExtra("width", projectWidth.text.toString().toInt().absoluteValue)
                     intent.putExtra("height", projectHeight.text.toString().toInt().absoluteValue)
-                    if(projectWidth.text.toString().toInt().absoluteValue<1 ||
-                        projectWidth.text.toString().toInt().absoluteValue>2000 ||
-                        projectHeight.text.toString().toInt().absoluteValue<1 ||
-                        projectHeight.text.toString().toInt().absoluteValue>2000){
+                    if(!isProjectWidthValid(projectWidth.text.toString().toInt())||
+                        !isProjectHeightValid(projectHeight.text.toString().toInt())){
                         Toast.makeText(this, "Enter a valid width and height(1-2000)", Toast.LENGTH_SHORT).show()
                         appropriateSize = false
                     }
@@ -195,6 +193,17 @@ class FileCreation : AppCompatActivity() {
         var IMAGE_REQUEST_CODE = 100
         fun projectNameIsValid(name: String): Boolean{
             return name.isNotEmpty()
+        }
+
+        fun isProjectWidthValid(width: Int): Boolean{
+            if(width in 1..2000)
+                return true
+            return false
+        }
+        fun isProjectHeightValid(width: Int): Boolean{
+            if(width in 1..2000)
+                return true
+            return false
         }
     }
 }
