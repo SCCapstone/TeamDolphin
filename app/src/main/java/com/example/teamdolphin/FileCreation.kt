@@ -85,8 +85,6 @@ class FileCreation : AppCompatActivity() {
         }
 
         //Button to import image
-        //Currently only shows the image in preview
-        //TODO: still need to find a way to apply that image on canvas
         var importButton = findViewById<ImageButton>(R.id.button_import)
         importButton.setOnClickListener {
             Toast.makeText(this, "Import button clicked", Toast.LENGTH_SHORT).show()

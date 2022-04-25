@@ -46,13 +46,14 @@ public class TesterCanvas extends AppCompatActivity {
     //inited the DrawView object
     private DrawView paint;
 
-    //current functionality of canvas with SEMESTER 1 Build
+    //Orignal Functionality of Canvas
     private ImageButton undo, save, brush, home, dropdown;
 
-    private ImageButton eraser, colorPicker, pen, eyeDropper;
-    private ImageButton selection, paintBucket, colorPreview, shapeTool;
+    //Functionality Added onto Canvas
+    private ImageButton eraser, colorPicker, eyeDropper;
+    private ImageButton paintBucket, shapeTool;
     private ImageButton drag, zoom, rotate, fixView;
-    private ImageButton circle, rect;
+    private ImageButton circle;
 
     private LinearLayout shapes;
 
@@ -177,6 +178,8 @@ public class TesterCanvas extends AppCompatActivity {
         //Make Full Menu Visible and Hidden
         dropdown.setOnClickListener(DropDownOnClickListener);
 
+        //The Sliders for our tool functionalities
+
         //ranges of the brush size slider/rangeSlider
         rangeSlider.setValueFrom(0.0f);
         rangeSlider.setValueTo(100.0f);
@@ -217,6 +220,7 @@ public class TesterCanvas extends AppCompatActivity {
 
         });
 
+        //Initialization of our Canvas
         ViewTreeObserver vto = paint.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -250,81 +254,10 @@ public class TesterCanvas extends AppCompatActivity {
         //OnClick Listener for Shape Tool
         shapeTool.setOnClickListener(ShapeToolOnClickListener);
         fixView.setOnClickListener(fixViewOnClickListener);
-        //Pen tool needs to be implemented or removed
-        /*pen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = getApplicationContext();
-                CharSequence text = "Pen Tool";
-                int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
-        });*/
-
-        //paint bucket needs to be implemented
+        //OnClick Listener for Paint Dumper Tool
         paintBucket.setOnClickListener(PaintBucketOnClickListener);
 
-        //OnClick Listener for rectangle Tool
-        //rangeSliderRect.setValueFrom(0.0f);
-        //rangeSliderRect.setValueTo(1500.0f);
-        final boolean[] rectClickedBefore = {false};
-//        rect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (rectClickedBefore[0] == false)
-//                {
-//                    Context context = getApplicationContext();
-//                    CharSequence text = "Rectangle Tool";
-//                    int duration = Toast.LENGTH_SHORT;
-//
-//                    Toast toast = Toast.makeText(context, text, duration);
-//                    toast.show();
-//                    final float[] range = {100};
-//                    rangeSliderRect.addOnChangeListener(new RangeSlider.OnChangeListener() {
-//                        @SuppressLint("RestrictedApi")
-//                        @Override
-//                        public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-//                            range[0] = value;
-//                        }
-//                    });
-//                    rangeSliderRect.setVisibility(View.VISIBLE);
-//                    rectClickedBefore[0] = true;
-//                    paint.setEnabled(true);
-//                    paint.setOnTouchListener(new View.OnTouchListener() {
-//                        @RequiresApi(api = Build.VERSION_CODES.Q)
-//                        @Override
-//                        public boolean onTouch(View v, MotionEvent event) {
-//                            float xDown = 0;
-//                            float yDown = 0;
-//
-//
-//                            switch (event.getActionMasked()) {
-//                                case MotionEvent.ACTION_DOWN:
-//                                    xDown = event.getX();
-//                                    yDown = event.getY();
-//                                    //Rect(left, top, right, bottom);
-//
-//                                    paint.createRect(((int) xDown), ((int) yDown), ((int) xDown) + ((int) range[0]), ((int) yDown) + ((int) range[0]));
-//                                    //TODO: bug: Rectangle only shows after moving rectangle slider
-//                                    //TODO: bug: Rectangle disappears after switching tools
-//                                    break;
-//                                case MotionEvent.ACTION_MOVE:
-//                                    break;
-//                                case MotionEvent.ACTION_UP:
-//                                    break;
-//                            }
-//
-//                            return true;
-//                        }
-//                    });
-//                } else {
-//                    rangeSliderRect.setVisibility(View.GONE);
-//                    rectClickedBefore[0] = false;
-//                }
-//            }
-//        });
 
         final boolean[] circleClickedBefore = {false};
         //OnClick Listener for circle Tool
@@ -382,18 +315,22 @@ public class TesterCanvas extends AppCompatActivity {
         colorPickerDialogue.show();
     }
 
+    //Helper Clases for our DropDown Menu
+    //Closing Dropdown Menu when opened
     public void closeDropDown() {
         for (int i = 4; i < buttonsList.length; i++) {
             buttonsList[i].setVisibility(View.GONE);
         }
     }
 
+    //Opening Dropdown Menu when closed
     public void openDropDown() {
         for (int i = 4; i < buttonsList.length; i++) {
             buttonsList[i].setVisibility(View.VISIBLE);
         }
     }
 
+    //Copy Current tool to main menu row
     public void copyPrimaryButtonFrom(ImageButton selectedButton, View.OnClickListener listener) {
         if(primaryButton.getId()==selectedButton.getId())
             return;
@@ -409,6 +346,7 @@ public class TesterCanvas extends AppCompatActivity {
         }
     }
 
+    //onclick listener for eyedropper functionality
     private final View.OnClickListener EyeDropperOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -454,6 +392,7 @@ public class TesterCanvas extends AppCompatActivity {
         }
     };
 
+    //onclick listener for our brush functionality
     private final View.OnClickListener BrushOnClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -488,7 +427,8 @@ public class TesterCanvas extends AppCompatActivity {
         }
     };
 
-
+    //onclick listener for our eraser funcationlity
+    //Tracks Eraser Size/Color
     private final View.OnClickListener EraserOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -516,6 +456,8 @@ public class TesterCanvas extends AppCompatActivity {
         }
     };
 
+    //onclick listener for udno functionality
+    //Undo's using our Stroke from the ArrayList paths
     private final View.OnClickListener UndoOnClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -530,6 +472,7 @@ public class TesterCanvas extends AppCompatActivity {
         }
     };
 
+    //onclick listener for our Color Dialogue
     private final View.OnClickListener ColorPickerOnClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -538,6 +481,7 @@ public class TesterCanvas extends AppCompatActivity {
         }
     };
 
+    //onclick listener for dropdown, used for closing the sliders
     private final View.OnClickListener DropDownOnClickListener = new View.OnClickListener(){
         public void onClick(View view) {
 
@@ -770,8 +714,6 @@ public class TesterCanvas extends AppCompatActivity {
                     }
                 });
 
-            //paint.drag();
-            //paint.setCameraDistance();
             copyPrimaryButtonFrom(drag, DragOnClickListener);
         }
     };

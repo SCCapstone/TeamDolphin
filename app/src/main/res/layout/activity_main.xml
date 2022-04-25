@@ -188,11 +188,6 @@
             android:stretchMode="columnWidth" />
     </LinearLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container_toggleThemeButton"
-        android:name="com.example.teamdolphin.ToggleTheme"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_toggle_theme" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
